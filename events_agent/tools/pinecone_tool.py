@@ -34,18 +34,14 @@ def _get_index():
 
 def _build_embed_text(event: CareerEvent) -> str:
     """Combine event fields into a single string for Pinecone to embed."""
-    companies = ", ".join(event.companies_attending) if event.companies_attending else ""
     majors    = ", ".join(event.target_majors) if event.target_majors else ""
     return "\n".join(filter(None, [
         f"Title: {event.title}",
         f"Type: {event.event_type or ''}",
         f"Industry: {event.industry or 'General'}",
         f"Location: {event.location}",
-        f"Virtual: {'Yes' if event.is_virtual else 'No'}",
         f"Date: {event.date or 'Unknown'}",
-        f"Experience Level: {event.experience_level or ''}",
         f"Target Majors: {majors}",
-        f"Companies Attending: {companies}",
         f"Organizer: {event.organizer or ''}",
         f"Description: {event.description or ''}",
     ]))
@@ -73,11 +69,7 @@ class RankedEvent(BaseModel):
     date: str
     location: str
     venue: Optional[str] = None
-    is_virtual: bool = False
     industry: str
-    event_type: Optional[str] = None
-    experience_level: Optional[str] = None
-    companies_attending: Optional[list[str]] = None
     target_majors: Optional[list[str]] = None
     organizer: Optional[str] = None
     description: str
@@ -113,14 +105,9 @@ def ingest_events_to_pinecone(events: list[CareerEvent]) -> dict:
                 "end_date":         event.end_date or "",
                 "location":         event.location,
                 "venue":            event.venue or "",
-                "is_virtual":       event.is_virtual,
                 "industry":         event.industry or "General",
-                "event_type":       event.event_type or "",
-                "experience_level": event.experience_level or "",
                 "target_majors":    event.target_majors or [],
-                "companies_attending": event.companies_attending or [],
                 "organizer":        event.organizer or "",
-                "organizer_type":   event.organizer_type or "",
                 "description":      event.description or "",
                 "registration_url": event.registration_url or "",
                 "source":           event.source,
@@ -155,9 +142,6 @@ def retrieve_career_events(
                            'Junior CS student interested in AI in Austin, TX'.
         industry:          Filter by industry e.g. 'Tech'.
         location:          Filter by city e.g. 'Austin, TX'.
-        event_type:        Filter by type e.g. 'career_fair', 'networking'.
-        experience_level:  Filter by level e.g. 'internship', 'entry_level'.
-        include_virtual:   Whether to include virtual events.
         top_k:             Number of results to return.
         date_weight:       Weight for date proximity score (0-1).
         similarity_weight: Weight for semantic similarity score (0-1).
@@ -193,11 +177,7 @@ def retrieve_career_events(
             date=                fields.get("date", ""),
             location=            fields.get("location", ""),
             venue=               fields.get("venue"),
-            is_virtual=          fields.get("is_virtual", False),
             industry=            fields.get("industry", ""),
-            event_type=          fields.get("event_type"),
-            experience_level=    fields.get("experience_level"),
-            companies_attending= fields.get("companies_attending"),
             target_majors=       fields.get("target_majors"),
             organizer=           fields.get("organizer"),
             description=         fields.get("description", ""),

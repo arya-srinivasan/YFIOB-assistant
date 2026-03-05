@@ -27,11 +27,6 @@ career_events_rag_agent = Agent(
         3. Present the top results clearly, including the event name, date, 
            location, description, and registration link.
         4. Prioritize upcoming events and those most relevant to the user's industry.
-
-        If the user's query is vague, ask for their industry or location to
-        improve the results before calling the tool.
-
-        Event data is refreshed automatically every 20 minutes.
     """,
     tools=[retrieve_career_events],
 )
