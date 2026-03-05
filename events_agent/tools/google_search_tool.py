@@ -45,7 +45,7 @@ def google_search_career_events(
         "engine":  "google",
         "q":       query,
         "num":     num_results,
-        "tbs":     "qdr:m3",   # Results from last 3 months
+        "tbs":     "qdr:m3",
     }
 
     response = requests.get(SERPAPI_ENDPOINT, params=params, timeout=10)
@@ -63,7 +63,7 @@ def google_search_career_events(
             description=item.get("snippet", "").strip(),
             registration_url=item.get("link", "").strip(),
             source="google",
-            scraped_at=datetime.utcnow().isoformat(),
+            scraped_at=datetime.now().isoformat(),
         ))
 
     return events

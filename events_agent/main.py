@@ -11,9 +11,8 @@ from .scheduler import start_scheduler
 
 load_dotenv()
 
-
 LOCATION = os.getenv("EVENTS_LOCATION", "Santa Cruz, CA")
-INDUSTRY = os.getenv("EVENTS_INDUSTRY", None)   # e.g. "Tech" or leave as None
+INDUSTRY = os.getenv("EVENTS_INDUSTRY", None) 
 
 APP_NAME = "career_events_rag"
 USER_ID = "user_1"

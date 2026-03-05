@@ -8,8 +8,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-PINECONE_API_KEY    = os.getenv("PINECONE_API_KEY")
-PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
+EVENTS_PINECONE_API_KEY    = os.getenv("PINECONE_API_KEY")
+EVENTS_PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
 NAMESPACE           = "career-events"
 
 _index = None
@@ -17,10 +17,10 @@ _index = None
 def _get_index():
     global _index
     if _index is None:
-        pc = Pinecone(api_key=PINECONE_API_KEY)
-        if PINECONE_INDEX_NAME not in pc.list_indexes().names():
+        pc = Pinecone(api_key=EVENTS_PINECONE_API_KEY)
+        if EVENTS_PINECONE_INDEX_NAME not in pc.list_indexes().names():
             pc.create_index_for_model(
-                name=PINECONE_INDEX_NAME,
+                name=EVENTS_PINECONE_INDEX_NAME,
                 cloud="aws",
                 region="us-east-1",
                 embed={
@@ -28,11 +28,9 @@ def _get_index():
                     "field_map": {"text": "text"},
                 }
             )
-        _index = pc.Index(PINECONE_INDEX_NAME)
+        _index = pc.Index(EVENTS_PINECONE_INDEX_NAME)
     return _index
 
-
-# ── Helpers ────────────────────────────────────────────────────────────────
 
 def _build_embed_text(event: CareerEvent) -> str:
     """Combine event fields into a single string for Pinecone to embed."""
@@ -109,7 +107,7 @@ def ingest_events_to_pinecone(events: list[CareerEvent]) -> dict:
         try:
             records.append({
                 "id":               event.id,
-                "text":             _build_embed_text(event),  # Pinecone embeds this
+                "text":             _build_embed_text(event),
                 "title":            event.title,
                 "date":             event.date or "",
                 "end_date":         event.end_date or "",
