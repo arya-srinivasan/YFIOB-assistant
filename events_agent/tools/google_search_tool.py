@@ -28,14 +28,6 @@ def google_search_career_events(
 ) -> list[CareerEvent]:
     """
     Search Google via SerpAPI for career events in a given location.
-
-    Args:
-        location:    City or region e.g. 'Austin, TX'.
-        industry:    Optional industry filter e.g. 'Tech'.
-        num_results: Number of results to return (max 10).
-
-    Returns:
-        List of CareerEvent objects.
     """
     keyword_query = " OR ".join(f'"{kw}"' for kw in CAREER_KEYWORDS)
     query = f"({keyword_query}) {industry or ''} {location}".strip()

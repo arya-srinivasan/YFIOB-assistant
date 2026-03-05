@@ -84,12 +84,6 @@ def ingest_events_to_pinecone(events: list[CareerEvent]) -> dict:
     """
     Upsert career events into Pinecone. Pinecone automatically embeds
     the text field using llama-text-embed-v2.
-
-    Args:
-        events: List of CareerEvent objects to ingest.
-
-    Returns:
-        Summary dict with upserted and failed counts.
     """
     index   = _get_index()
     records = []
@@ -134,20 +128,6 @@ def retrieve_career_events(
 ) -> list[RankedEvent]:
     """
     Retrieve and rank career events from Pinecone based on a student profile query.
-
-    Ranking combines semantic similarity (default 60%) and date proximity (default 40%).
-
-    Args:
-        query:             Natural language student profile e.g.
-                           'Junior CS student interested in AI in Austin, TX'.
-        industry:          Filter by industry e.g. 'Tech'.
-        location:          Filter by city e.g. 'Austin, TX'.
-        top_k:             Number of results to return.
-        date_weight:       Weight for date proximity score (0-1).
-        similarity_weight: Weight for semantic similarity score (0-1).
-
-    Returns:
-        List of RankedEvent objects sorted by final score descending.
     """
     index = _get_index()
 
