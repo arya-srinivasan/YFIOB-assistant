@@ -8,8 +8,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-EVENTS_PINECONE_API_KEY    = os.getenv("PINECONE_API_KEY")
-EVENTS_PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
+EVENTS_PINECONE_API_KEY    = os.getenv("EVENTS_PINECONE_API_KEY")
+EVENTS_PINECONE_INDEX_NAME = os.getenv("EVENTS_PINECONE_INDEX_NAME")
 NAMESPACE           = "career-events"
 
 _index = None
