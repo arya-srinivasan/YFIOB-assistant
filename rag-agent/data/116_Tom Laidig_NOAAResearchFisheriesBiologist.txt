@@ -1,0 +1,749 @@
+﻿Source: https://soundcloud.com/what-to-be/tom-laidig-noaa-research-fisheries-biologist
+Interviewee: Tom Laidig
+Industry Sectors: Agriculture and Natural Resources
+Takeaways: Early self-discovery and interest exploration: Understanding different career paths, Early self-discovery and interest exploration: Finding mentors role models and community, Skill development education and deep exploration: Real-life exposure and skill development, Skill development education and deep exploration: Non-traditional career paths, Career decision-making and commitments: Making informed career decisions
+
+
+#INTRO
+[00:00:00] Interviewer: 
+
+
+Hello and welcome everyone to KSQD Santa Cruz at 90.7 fm. I'm Patrick Harte, and you listening to our show, what to Be Where We interview Inspiring People and highlight their careers. What to be as a program provided by Your Future is our business. The Santa Cruz County non profit that helps students explore careers through programs such as college and career expos, panels, and other work based learning activities.
+
+
+Please note that the views and opinions expressed in this program do not necessarily represent or reflect those of Natural Bridges Media or the Or your future is our business. The information provided during this program does not reflect its career in its entirety. And today I have the pleasure to speak to Tom Laidig, who's a research fisheries biologist with NOAA, which is the National Oceanic Atmospheric Administration.
+
+
+Hi, Tom. 
+
+
+[00:00:59] Tom Laidig: 
+
+
+Hello. How are you doing? 
+
+
+[00:01:00] Interviewer: 
+
+
+Oh, I'm pretty good. Thank you. And thank you very much for being a guest on the show. Really appreciate it. Oh, you're welcome. Awesome. Thanks. Tom, do you mind briefly describing your career journey for us? 
+
+
+[00:01:11] Tom Laidig: 
+
+
+Okay. So the journey is let's see. I started out going to school in UC Santa Barbara, learning aquatic biology.
+
+
+I got a bachelor's there. Then I went on to San Francisco State University, got a master's there in marine biology. And about a year after that, I got hired on with NOAA. And I started working on ear bones called otoliths and doing daily aging of baby fish otoliths to figure out how many days old they were.
+
+
+And then I moved on to going to another group where I worked on deep slope fishes looking at their stomach contents and what they ate. And then from there I moved on to going to count fish underwater using ROVs, remotely operated vehicles, and submarines. And then from that it progressed on to doing all sorts of different activities in the deep slope or  deep waters, things deeper than 200 meters or 200 feet generally.
+
+
+And up till today where I kind of run the projects on deep sea corals, deep sea fishes, deep sea sponges, looking at abundance of fishes, looking at abundance of corals, and looking at Generally, the association between the two, trying to figure out if the presence of corals increase the number of fishes.
+
+
+And since I work for the National Marine Fisheries Service, part of NOAA, our mandate is to increase the fisheries. So that's part of my job, is to figure out the number of fish and ways that we can enhance the fisheries and the catchability of all the fish. so that we can sustain the number of fish or even increase the numbers of fishes over the time so that we can have them to fish and then also to view and to go and look and just to have sustainable populations.
+
+
+#ROV
+
+
+[00:03:14] Interviewer: 
+
+
+Yeah, I think that's really great work. And so with a lot of this research, are you using like ROVs? 
+
+
+[00:03:21] Tom Laidig: 
+
+
+Yeah. So since about 1991, I've been dealing in projects, a lot of projects that deal with ROVs, which again are remotely operated vehicles. They're basically cameras underwater attached to the surface vehicle with a tether.
+
+
+And so you can see everything the camera sees and It moves around and we use those to count fish, get numbers of fish and densities, and then we also now for the past 10 years have been working on corals and sponges, doing similar studies and trying to equate the numbers of corals and sponges and the number of fishes to see if there's some kind of associations.
+
+
+[00:04:02] Interviewer: 
+
+
+Okay. And are you able to control those ROVs from your desk at NOAA? 
+
+
+[00:04:08] Tom Laidig: 
+
+
+Not generally. Every once in a while you can, but you pretty much have to be either out at sea, and then you talk to the pilots, or sometimes I've run the ROVs myself. But it is nicer to have somebody else run it so you can actually focus on the science and not think about the driving.
+
+
+And, but we did do one cruise. During the pandemic in what is the last year in October, where we ran the crews from our desks, but people were out at sea. And it was interesting because it was about a three to four second delay. So you would tell them to do something. And then you'd wait, which seems like an eternity, and then it would finally happen.
+
+
+Because if you see something interesting, right? 
+
+
+[00:04:54] Interviewer: 
+
+
+Because if you see something interesting to have that delay, be like, oh, wait, go back, go back.
+
+
+[00:04:58] Tom Laidig: 
+
+
+Yep. And that's why you tried to keep it, you tried to keep it to the three second, but as with everybody who probably knows these days, computers are doing all sorts of funky things because everybody's online.
+
+
+And so it just seemed to, it just seemed to drift that, you know, you start out three seconds and then like. 10 minutes later, it's six seconds behind and then it's seven. And then it's like, you tell everybody, Oh, I got to reboot the computer. And oh manhen you reboot back to three seconds and then go . Yeah, it was interesting, but it was, you know, it was a way for us to go out and get data when it wouldn't have been possible otherwise because of the pandemic.
+
+
+#TECHNOLOGY
+
+
+[00:05:35] Interviewer: 
+
+
+Nice. I'm glad it worked out. It sounds like, and Tom, what's the span of your career so far?
+
+
+[00:05:41] Tom Laidig: 
+
+
+I got hired in 1988, almost. To the day. Well, it was September 4th. So pretty close to being 33 years ago. And working for the same group for 33 years. 
+
+
+[00:05:56] Interviewer: 
+
+
+Oh, that's pretty awesome. And just seeing the advancement in technology and things like that must be fun for you, right?
+
+
+[00:06:02] Tom Laidig: 
+
+
+Oh, yeah. When we started out, we were using Beta tapes and old VHS tapes. And now we've moved on to all digital. 
+
+
+[00:06:12] Interviewer: 
+
+
+Yeah. 
+
+
+[00:06:12] Tom Laidig: 
+
+
+So it's a complete change of what we were doing. 
+
+
+[00:06:15] Interviewer: 
+
+
+That's pretty cool. And you were telling me before the interview that you've had, you know, the opportunity to ride in submersibles to do your research, right?
+
+
+[00:06:24] Tom Laidig: 
+
+
+Yes. Back in, I'm going to say 97, I got my first shot at going down in a one person submersible. Wow. And I had to learn how to pilot it, and basically the piloting isn't as bad, it's the life saving equipment that you need to learn, so how much oxygen comes in, because if some of the listeners don't know, if you have too much oxygen, you can get oxygen toxicity, so you have to keep your oxygen levels right, and then you have to keep your CO2 levels right, because you can pass out if CO2 gets too high, so there's all these different things that you have to control.
+
+
+when you're in that kind of environment. It's very similar to being in a spaceship. They have to do the same kind of oxygen controls and CO2 controls that we did. 
+
+
+[00:07:10] Interviewer: 
+
+
+Yeah, but I would imagine there's a lot of different sensors monitoring those levels. Is that correct? 
+
+
+[00:07:15] Tom Laidig: 
+
+
+Yes and no. I mean, there's a bunch, but it's not as much as you think.
+
+
+They try to get them as streamlined as possible. So there's usually redundant systems. So there's two oxygen monitors. There's two CO2 monitors, multiple depth, and other environmental sensors. So you know what's going on. Then you have the cameras so you can see externally. And then there's all the safety equipment.
+
+
+So there's ways to get the submarines up to the surface, like by dropping weights, or dropping the battery packs, which are weights. So if there was an issue, you could not just drive it up to the surface, but you could drop these weights and then float up. So that way you can get up to the surface much faster and hopefully safely.
+
+
+[00:08:02] Interviewer: 
+
+
+Yeah. And you don't have to, there's no timing that you have to wait to shoot to the surface because it's, you're in a pressurized submersible, right? 
+
+
+[00:08:10] Tom Laidig: 
+
+
+Correct. You're basically like sitting here at our desks, we're at one atmosphere pressure. So you're generally that in the sub though, it goes up slightly because you bleed oxygen in a little bit, but it's negligible.
+
+
+[00:08:23] Interviewer: 
+
+
+Okay. I was thinking about when you're talking about the one man submersible, Well, what's the training look like for that? I mean, if you're doing the training on a computer getting in it for the first time must be pretty well, quite a bit different, but pretty exhilarating, right? 
+
+
+[00:08:38] Tom Laidig: 
+
+
+It is.
+
+
+And our first training was in a seven foot deep pool. 
+
+
+[00:08:43] Interviewer: 
+
+
+Okay. So, 
+
+
+[00:08:45] Tom Laidig: 
+
+
+you know, you just, they put it in the pool and then you get in it and you go to the bottom and you do everything. And so you're completely underwater, but you're not very far. So. Yeah, something happened. There's safety divers who would be able to jump in and and open the hood, open it up.
+
+
+It would get those inside of the submersible wet, but you'd be safe. 
+
+
+[00:09:02] Interviewer: 
+
+
+Yeah, the consequences don't seem quite as dramatic as when you're when you're out there, right? In the open ocean. 
+
+
+[00:09:08] Tom Laidig: 
+
+
+Oh, right. I mean, I've been down to 400 and something meters. So about a quarter of a mile down. And yeah, that would be much more traumatic if something happened down there.
+
+
+[00:09:17] Interviewer: 
+
+
+And that's that's so cool. And that must be pretty dark down there. 
+
+
+[00:09:20] Tom Laidig: 
+
+
+Yeah, It's interesting, if you're in the Monterey area, it's probably around 500 feet that it gets completely pitch black. And if you go down to Southern California, it's probably 700 800 feet before it gets pitch black. So once you get to that level, it doesn't really matter how much deeper you go, it's just going to be pitch black.
+
+
+[00:09:39] Interviewer: 
+
+
+Okay, is our water maybe not as clear because of the upwelling and of the nutrients? We have very nutrient rich water, right, in the Monterey?
+
+
+[00:09:48] Tom Laidig: 
+
+
+Yes, that's exactly what it is. The canyon helps, too, in the Monterey area. that shunts all that deep water, nutrient rich water up to the surface, and then all the phytoblankton get it and starts that whole process.
+
+
+[00:10:01] Interviewer: 
+
+
+Have you been able to just scuba dive to do your research? 
+
+
+[00:10:04] Tom Laidig: 
+
+
+I do do that too. That's another aspect. I work in basically southern Monterey Bay area along Pacific Grove and Monterey, counting baby rockfish. 
+
+
+[00:10:15] Interviewer: 
+
+
+Oh wow
+
+
+[00:10:16] Tom Laidig: 
+
+
+So I look at the settlement, what's called settlement, because maybe the rockfish that we have off our coast actually have internal fertilization.
+
+
+They're not like other fish. So they actually give birth to live larvae. And those fish swim around in the ocean for about three to four to six months. And then they settle into the environment. typically the kelp bed, but sometimes they're a lot, they settle to deeper water. And so once they settle to the kelp bed, I count them before they move into their adult habitats.
+
+
+#TOM AND RESEARCH
+
+
+[00:10:48] Interviewer: 
+
+
+Okay. Tom, where have you primarily done your research over the past 30 years? Is it just right here in our area or has it been up and down the coast of California or beyond? 
+
+
+[00:11:00] Tom Laidig: 
+
+
+So most of my research has been In and around Central California, but I've done research. Also, I guess the other main area would be in Southern California off the islands and on seamounts down there.
+
+
+But then I've done research like one of our diving place for juvenile rockfish used to be off of Mendocino Coast, and it was really cool to compare the juveniles that would settle up north versus the ones that would settle in Monterey. And then I've also done work basically from Alaska to, I haven't gone into Mexico, but to Southern California, just different projects I've been on.
+
+
+And then also work in Hawaii. Got to do six years on and off with different projects in Hawaii. 
+
+
+[00:11:47] Interviewer: 
+
+
+Well, those sound like pretty great places to go for work. 
+
+
+[00:11:50] Tom Laidig: 
+
+
+Yep. Can't beat going to Hawaii, 
+
+
+[00:11:54] Interviewer: 
+
+
+especially when you're on the clock. 
+
+
+[00:11:56] Tom Laidig: 
+
+
+Yes. You get paid to go dive in Hawaii. It was a nice, 
+
+
+[00:11:59] Interviewer: 
+
+
+yeah. Your job just sounds, it sounds really cool.
+
+
+Tom, do you want to tell us kind of what your typical day or week looks like? And maybe that's changed over the past year, but maybe not. 
+
+
+[00:12:09] Tom Laidig: 
+
+
+Yeah. So basically I work most of the time in the office. And so whether it's this home office sitting here at my dining room table, or if it's in the office and working on the computers analyzing data, writing papers, doing reports, and then also doing a lot of video analysis.
+
+
+Since a lot of our work is getting video footage from either ROVs, submersibles, or AUVs, Autonomous Underwater Vehicles. We get a lot of this video footage and still images. So we go and take all that data, analyze it, and then figure out whatever the question is we have for that research. We look at that.
+
+
+And then typically one to two times a year, we have a cruise and the cruises can be anywhere from six days to 45 days, depending on the funding and who's involved. And so then I'll be out to see for those days gathering data. And so that's basically kind of a typical day would be in the office. But for the year I go out a couple of times.
+
+
+And then, you know, maybe 10 times a year I go diving in Monterey to get surveys. 
+
+
+[00:13:20] Interviewer: 
+
+
+Okay, nice. And yeah, you were talking about that you, a part of your work is, you know, keeping track of the fish populations and help to grow those populations, right? 
+
+
+[00:13:31] Tom Laidig: 
+
+
+Correct. When I do an ROV survey, I'll look at the numbers and the density of the fishes that are there.
+
+
+And then we give that information to the Pacific Fisheries Management Council, which then sets the quotas for the fishermen. And so it's kind of this whole group where we go out and we tell them how many are there, and then they go and figure out more of the political side to figure out how many can be caught. 
+
+
+[00:13:56] Interviewer: 
+
+
+Okay. Yeah, I had the pleasure, maybe two years ago or so, to, to help Noah and volunteer to help scene the Scotts Creek River? 
+
+
+[00:14:04] Tom Laidig: 
+
+
+Yes. 
+
+
+[00:14:04] Interviewer: 
+
+
+Right. And then so then I think some of those fish, well they can like wave a wand over to see if they were tagged, but then they would tag the, the fish. The fish that they needed to and also do like counts, you know of different gobies and sculpins and different things, right?
+
+
+[00:14:17] Tom Laidig: 
+
+
+Yeah, they put a tag in their snout. Yep. 
+
+
+[00:14:20] Interviewer: 
+
+
+Okay. And then are there buoys out in the ocean that help keep track of where these fish are moving to and from? 
+
+
+[00:14:27] Tom Laidig: 
+
+
+Not buoys per se. I mean, the big buoys out there for the weather, but there are projects that people have tagged like the salmon and the trout that you're talking about, they have tagged them and so they put receivers out in the water that then pick up that tag as they go by.
+
+
+So they can tell if the fish is in that area, generally. 
+
+
+#SALMON
+
+
+[00:14:49] Interviewer: 
+
+
+And how are the salmon populations doing, like, over the past, I guess, since you've started doing your research? 
+
+
+[00:14:56] Tom Laidig: 
+
+
+They're kind of in decline, generally. I actually worked on salmon for a few years, and with the droughts and things, the coho salmon that we have along the coast, the numbers seem to be less, so they're still holding on.
+
+
+I mean, they've been low. for a long time. So if we get some wet years, I think they'll rebound even better. But there's been a lot of habitat restoration, those kind of actions, and it's helping, but the numbers are still low. We'd love to get them up higher. 
+
+
+[00:15:26] Interviewer: 
+
+
+And what do you attribute that to primarily? Is that potentially rising global water temperatures?
+
+
+[00:15:33] Tom Laidig: 
+
+
+So a lot of it is, I mean, there's so many different things, but yeah, global warming is part of it with increasing temperatures, but then there's also diversion of water. I mean, we need water to drink. So we have to, you know, we have to take some of the water. And when you do that, then there's less water.
+
+
+So the water that remains gets can get hotter. And because there's, you know, it's not as thick or deep, I should say not. So there's that there's fishing. People fish and they take the fish out so there's less of a population to spawn. There was habitat degradation. But we're doing a really good job now of getting that back to the pristine, or not pristine, but toward what it was pristine back in the day.
+
+
+And so that's helping. Is that whether there's a lot of other factors, there's diseases that go through the population periodically, which , it happens with a lot of different organisms. 
+
+
+#DAY-TO-DAY
+
+
+[00:16:29] Interviewer: 
+
+
+And Tom, would you share with us some of the skills that you use in your day-to-Day work? 
+
+
+[00:16:34] Tom Laidig: 
+
+
+So the skills I would use. In the general word processing, you know, when I'm on the computer, just kind of word and excel.
+
+
+Then there's a lot of statistical programs. So I use something called sass, which is kind of outdated now. But, you know, I'm all guys. So I use outdated stuff, but it's still a way to figure out statistical models and build things. A lot of people use R. Now it's a statistical package that's online and free, and so people use that.
+
+
+So those are the main ones, and then I use a lot of video software. So I use Adobe Premiere and a thing called VLC to watch videos and to record the fish numbers, coral numbers, sponge numbers. 
+
+
+[00:17:20] Interviewer: 
+
+
+Okay. And when you're using the AOVs earlier, was that right? 
+
+
+[00:17:25] Tom Laidig: 
+
+
+AUV. 
+
+
+[00:17:26] Interviewer: 
+
+
+AUV. Thank you. So you kind of know where you want the AUV to look for things and you can program that in and it, and it'll follow that path.
+
+
+And then is it your job to review that recorded video, that data? 
+
+
+[00:17:39] Tom Laidig: 
+
+
+Yeah. So it's very similar to the ROV. You know, we go out and  we use ROV and we can see in real time what's going on. The AUV, as you say, is pre programmed. You drop it in and then when it comes back, you don't really know what it saw. So then you go back and you have to watch all the video or the still images and you get surprised sometimes at what it actually sees.
+
+
+[00:18:01] Interviewer: 
+
+
+Yeah, I bet. Like what is something cool that I guess that surprised you over the years of, you know, viewing that video? 
+
+
+[00:18:10] Tom Laidig: 
+
+
+So for the AUV, some of it is. For the last 10 or so years, we've been doing deep sea corals. So you send it in the AUV into an area where you don't know if there's corals or not, and you come back and you see these things that are 10 foot high coral, and it's like, We found a good spot, you know, but you don't know because it's like the missions are eight hours long and then the processing is about four hours. So after you drop it in 12 hours later, maybe you can see the images. So it's the anticipation.
+
+
+[00:18:38] Interviewer: 
+
+
+I bet. And maybe a lot of people in myself, you know, we don't really think of.
+
+
+Coral, like in the deep or in even cold water, maybe for that matter. 
+
+
+[00:18:50] Tom Laidig: 
+
+
+Yeah, so the corals that you see, like in Hawaii, they have algae in them called zooxanthellae, which gives them food. So the corals don't have to really catch all the food themselves. The corals, if you can think of an anemone, the corals are really related to this group cnidarians, or they are a cnidarian, which they are basically have polyps.
+
+
+They have these little tiny like cups with tentacles at the end and they catch their own food. But  in areas where there's sunlight in all the tropics, they have these algae that live inside the tissue with them that the algae photosynthesize and create food for the animal. So it has a symbiotic relationship.
+
+
+But in the deep sea where it's dark, there is none of that algal relationship. So they have to catch the food by themselves. So they're all the deep sea or cold water corals. are basically slow growing because they have to catch all these little tiny organisms themselves and feed that way. And they're very long lived.
+
+
+A lot of the black corals that we have here can live over a thousand years. Or have been aged to over a thousand years. And so they go really slow. They grow like a millimeter a year. 
+
+
+[00:20:07] Interviewer: 
+
+
+So have they adapted in a way to be able to attract their own food? 
+
+
+[00:20:12] Tom Laidig: 
+
+
+Well, I don't know if they've adapted, but That's one of the things we're looking at, but I think what happens is, what they have is since  the corals live in one spot, they cement to a rock, but they have free, free living larvae that go and then move and then attach some other rock later, and when you see it, you find corals in groups, and I think one of the running theories is it's a really productive area above that, so the phytoplankton die, fall down, And then the corals eat those. So they live in a productive area below that. 
+
+
+[00:20:50] Interviewer: 
+
+
+Interesting. And then, I guess over time, you know, that population of coral probably just grows in that area because of the, that relationship with the phytoplankton? 
+
+
+[00:21:00] Tom Laidig: 
+
+
+I was going to say, yeah, it's the phytoplankton or the currents that may bring the phytoplankton, the zooplankton, whatever happens to come down to them.
+
+
+Because when you get down below, say, a hundred meters, so like three, 330 feet or so, you get this stuff called marine snow. And it's just in the water column. And it's white stuff that just drips like snow down and it's the basically the dead bodies or the shed bodies of zooplankton and the dead bodies of phytoplankton that have now stuck together so you see them larger, and they fall down in the ocean and this is a huge food source for the deep sea.
+
+
+[00:21:41] Interviewer: 
+
+
+And is that invisible to like the naked eye?
+
+
+[00:21:42] Tom Laidig: 
+
+
+Oh, no, you see it. Like when I'm watching, when I'm watching the videos, if I fast forward, it looks like something from Star Trek.Because all the little white things are flying by like stars would be. 
+
+
+#FACORITE PROJECTS
+
+
+[00:21:54] Interviewer: 
+
+
+That is so cool. Thanks for sharing that. And for those who are just tuning in, you're listening to the What to Be show on KSQD Santa Cruz, 90.7 FM. I'm Patrick Hart and I'm speaking with Tom Leidig. Who's a research fisheries biologist with NOAA, which is the National Oceanic Atmospheric Administration. Tom, I was wondering, you know, you've worked in your field for about 30 years. Do you mind sharing some of your favorite projects that you've worked on or are currently working on?
+
+
+[00:22:23] Tom Laidig: 
+
+
+Sure. I mean, I would say some of my favorite ones are definitely going down in the submarine. When you're sitting there at 600 feet and you're staring eye to eye with some fish. Yeah, absolutely. You know, it's, to me, that's really cool because fish, fish are really the thing that I'm interested in. I've just loved fish my whole life.
+
+
+So going down and watching them, it's a completely different feeling than the way we used to get data by trawling up fish. Now you can go down and actually watch them and observe them and see what their behaviors are and learn about why they are in certain habitats and not. So I really like those kind of projects where you can go out and learn about the creatures. So like I said, I've been doing deep sea corals also for the last 10 years and just going down and seeing how the fish interact around the corals and just seeing some of the great, interesting animals that are there. Because these corals, I mean, there's some that are 10, like I said, 10 feet high.
+
+
+There's fish that you see, and I'm not talking about big sharks, but just regular fish that can be three feet long that are down there. Plus there's all the little guys that everybody forgets. You know, you have these giant fish that people love, but then there's the little like sculpins and things that are down on the bottom that are, they're just cute, but they're part of the whole ecosystem and they're important.
+
+
+[00:23:48] Interviewer: 
+
+
+yeah, like even like the little nudibranchs are pretty awesome, right? 
+
+
+[00:23:51] Tom Laidig: 
+
+
+Yep. And the nudibranchs eat the coral, the deep sea corals, which is sad, but they do. 
+
+
+[00:23:56] Interviewer: 
+
+
+And yeah, you're talking about observing the fish and I'd imagine that's Certain fish, you know, different fish have different personalities too, right?
+
+
+[00:24:03] Tom Laidig: 
+
+
+You know, they do. There's, there's certain fish that are attracted to the vehicles and some that are repelled by the vehicles and some that, you know, basically could just care less. They just sit there. 
+
+
+[00:24:17] Interviewer: 
+
+
+Some fish are just more social than others? 
+
+
+[00:24:19] Tom Laidig: 
+
+
+There definitely are. There's fish that are in, in schools.
+
+
+They're social with other fish. And then there's fish that seem to want to come up and check out what's going on, I guess is the best way to say it. Because when I've been diving If you ever go diving in Southern California, there's fish called Garibaldi's, which is our state marine fish. It's a big orange fish.
+
+
+And they just love to check you out. I mean, you just go swim by. They come off the reef just to come and look at you. It's like, okay, hi. 
+
+
+[00:24:47] Interviewer: 
+
+
+That's so cool. And how big do those get?
+
+
+[00:24:49] Tom Laidig: 
+
+
+Maybe a foot. But if you go, if you're anywhere in Southern California and you go by the water like that, any of the piers or any of the marinas.
+
+
+And you look in there, you'll see bright orange fish every once in a while. And those are the Garibaldi's. 
+
+
+[00:25:04] Interviewer:
+
+
+And do they come up this way? 
+
+
+[00:25:06] Tom Laidig: 
+
+
+You know, they don't really get past point conception, maybe in an El Nino year, you might get a few, but generally they stay south. 
+
+
+[00:25:13] Interviewer: 
+
+
+For the, for the temperature? 
+
+
+[00:25:15] Tom Laidig: 
+
+
+Yeah, I assume it's temperature related.
+
+
+That's what most of it is cuz things south of point conception are probably 5 10 degrees warmer in the surface waters than they are for us. 
+
+
+#ADVICE
+
+
+[00:25:27] Interviewer: 
+
+
+Okay. Tom, what advice or resources can you give to students who are interested in pursuing a career in marine biology or any of the other related things that you do?
+
+
+[00:25:37] Tom Laidig: 
+
+
+Yeah, sure. First thing I would say, this is what I tell everybody, is go and meet some people. You know, go and meet a professor, go and meet a marine biologist, go and just even email, email them and chat with them. And just find out what they do. Because marine biology is such an open and wide field. I go out in the field a lot, but there's a bunch of people who work on mathematical models who sit in the lab all day.
+
+
+Or sit in not the lab, but sit in their office all day. And so it's kind of figuring out what you like to do. And then from that is see if you can volunteer for them or intern for them. Because that's the way, I mean, I've had, I wouldn't say hundreds, but tens of different interns over the years that have either liked or not liked what I've done or what they've done.
+
+
+And that helps narrow down the focus of this is what I'd like to do, and this is what I wouldn't. And then once you know that, you can start pursuing even more like if you wanted to go to school, you talk to the professors and see what they're working on, and if you could fit into their interests.
+
+
+So those kind of things would be the first steps
+
+
+[00:26:48] Interviewer: 
+
+
+Okay, and I think NOAA does have some internship programs, right? And I think, does your colleague Lisa Etal help with that? 
+
+
+[00:26:56] Tom Laidig: 
+
+
+Yeah, so we have different ones. We have the Hauling Scholar, which is one that you can do when you're in high school, even to start, and then it moves on to college.
+
+
+And then there's a bunch of other ones. that you could go to the NOAA webpage to find a lot of them. And then the sanctuaries, Lisa works with the sanctuaries and they have a bunch of different intern programs too that you can do. So just because I keep saying that there's two, NOAA has two different kind of underwater arms or marine arms.
+
+
+So there's the one arm where I'm in the fishery service, so we do a lot of research. Then you have the sanctuary arm, which does a lot of protections and manages all the sanctuaries, but they do have research in the sanctuaries too. And they have different programs in each of those two arms that you could go to check out.
+
+
+[00:27:48] Interviewer: 
+
+
+Okay, awesome. Thank you for sharing that. And Tom, what about advice for a student or someone listening who is unsure about their career path? 
+
+
+[00:27:55] Tom Laidig: 
+
+
+I would say something similar to that. You go and check out professors. Like when I was in school, I volunteered to do stomach samples of some surf perch and I liked that, but the person who did it with me, they didn't like it.
+
+
+And so they knew that, okay, I don't want to do this kind of stuff. So by going and just volunteering or talking to professors or people in a specific field or the type of work you want to do will really give you advanced knowledge on what you'd be doing for the rest of your life. 
+
+
+#OUTRO
+
+
+[00:28:29] Interviewer: 
+
+
+That's really good.
+
+
+Well, thank you, Tom. And for that, and thank you very much for being a guest today on the show. I really appreciate you taking the time to help us out. 
+
+
+[00:28:36] Tom Laidig: 
+
+
+Well, welcome, and I appreciate you having me, and I, because I love talking about this stuff, so it was fun. 
+
+
+[00:28:41] Interviewer: 
+
+
+Yeah, that's great, and thank you to all of our listeners for tuning in to today's Career Story with me, Patrick Hart, on our show, What to Be, with today's guest, Tom Leidig, who's a research fisheries biologist with NOAA, which is the National Oceanic Atmospheric Administration.
+
+
+If you have any questions or would like to share your career story with us, Please send us an email at what to be radio at gmail. com. If you've enjoyed our show, please join us again at 90. 7 FM. KSQD Santa Cruz at 7 PM on Sundays and streaming online at ksqd. org. Or you can find us on major podcast streaming platforms like Spotify.
+
+
+And please visit our website at YFIOB. org for more information about your future as our business. Thank you very much and see you next time.
