@@ -1,7 +1,6 @@
 """
 router.py — YFIOB Router
 Uses Groq to classify the student's message and dispatch to the right subagent(s).
-No external frameworks — just clean Python function calls.
 """
 
 import os
@@ -24,7 +23,7 @@ from memory import load_profile, init_db
 # import college_agent
 # from events_agent.main import run as events_run
 
-# ── Config ────────────────────────────────────────────────────────────────────
+# Config
 GROQ_API_KEY     = os.environ["GROQ_API_KEY"]
 GROQ_MODEL       = "llama-3.3-70b-versatile"
 AVAILABLE_AGENTS = ["rag_agent", "college_agent", "events_agent"]
@@ -37,7 +36,7 @@ def _get_groq():
     return _groq
 
 
-# ── Step 1: Classify ──────────────────────────────────────────────────────────
+# Classify 
 
 def classify(query: str, student_context: dict) -> list[str]:
     """Use Groq to decide which agents to call."""
@@ -74,7 +73,7 @@ Only include agents that are clearly relevant. Never include more than 2.
         return ["rag_agent"]
 
 
-# ── Step 2: Dispatch ──────────────────────────────────────────────────────────
+# Dispatch  
 
 def dispatch(query: str, agents: list[str], student_context: dict) -> dict:
     """Call each selected agent and collect results."""
@@ -103,7 +102,7 @@ def dispatch(query: str, agents: list[str], student_context: dict) -> dict:
     return results
 
 
-# ── Step 3: Synthesize ────────────────────────────────────────────────────────
+# Synthesize
 
 def synthesize(query: str, results: dict, student_context: dict) -> str:
     """Merge multiple agent responses into one cohesive reply."""
