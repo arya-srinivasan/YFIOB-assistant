@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Simple Chatbot (UI only)</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <main class="chat-app">
+    <header class="chat-header">
+      <h1>Career Chatbot</h1>
+    </header>
+
+    <section class="chat-window" id="chat-window">
+      <ul id="messages" class="messages">
+      </ul>
+    </section>
+
+    <form id="chat-form" class="chat-form" onsubmit="return false;">
+      <input id="message-input" class="message-input" placeholder="Type a message..." />
+      <button id="send-btn" class="send-btn" type="button">Send</button>
+    </form>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

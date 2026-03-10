@@ -1,0 +1,14 @@
+{
+  "name": "simple-chatbot-website",
+  "version": "1.0.0",
+  "description": "A simple website with a chatbot interface.",
+  "main": "src/js/main.js",
+  "scripts": {
+    "start": "live-server src"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
