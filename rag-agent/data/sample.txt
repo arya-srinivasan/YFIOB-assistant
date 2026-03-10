@@ -1,0 +1,11 @@
+Career Spotlight: Software Engineering
+
+Software engineering is the field of designing, building, testing, and maintaining software systems. Software engineers work on applications, websites, mobile apps, operating systems, and large-scale distributed systems. They use programming languages such as Python, Java, and JavaScript to create solutions that solve real-world problems.
+
+There are many different roles within software engineering. Frontend engineers focus on the user interface and user experience of applications. Backend engineers work on servers, databases, and application logic. Full-stack engineers work across both frontend and backend systems. Machine learning engineers specialize in building AI systems that can learn from data.
+
+To pursue a career in software engineering, students typically major in computer science, software engineering, or a related field. Important high school courses include mathematics (especially algebra and calculus), computer science, and physics. Participating in coding clubs, hackathons, or personal coding projects can strengthen college applications.
+
+Top universities known for computer science programs include Stanford University, MIT, and Carnegie Mellon University. These programs are competitive and often require strong grades, extracurricular involvement, and demonstrated technical ability.
+
+Software engineering is a rapidly growing career path with strong job prospects. According to labor statistics, demand for software engineers is expected to grow significantly over the next decade due to increased reliance on technology across industries.

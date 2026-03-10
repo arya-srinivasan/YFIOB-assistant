@@ -1,0 +1,570 @@
+Interviewee: Irvin Lemus
+Industry Sectors: Information and Computer Technologies
+Takeaways: Early self-discovery and interest exploration: Understanding different career paths, Early self-discovery and interest exploration: Exploring personal interests passions and values, Skill development education and deep exploration: Real-life exposure and skill development, Skill development education and deep exploration: Formal education and degree programs, Career decision-making and commitments: Making informed career decisions
+
+Source: https://soundcloud.com/what-to-be/ethical-hacker-computer-information-systems-instructor-irvin-lemus
+
+# INTRODUCTION TO SHOW AND GUEST 
+Interviewer: Nick 0:17  
+You're listening to KSQD Santa Cruz at 90.7 FM. My name is Nick, and I'm an intern at Your Futures Our Business, a Santa Cruz County nonprofit that helps students ages 10 to 18 explore careers and start their career journey. We provide career expos, panels, guest speakers, and more activities to help you explore careers. Today, I'm here with my other host, Melina. 
+
+Interviewer: Melina 0:35  
+Hello, everyone. Our show, What to Be, highlights the career journeys of inspirational people in Santa Cruz County. If you've ever thought, "Hmm, how did they get that job?" or "What is that job really like?" keep on listening.
+
+Interviewer: Nick 0:53  
+We would like to remind listeners that the opinions expressed by today's guests do not necessarily reflect this career in its entirety. Today,
+
+# GUEST’S JOB DESCRIPTION AND SPECIALIZATION 
+Interviewer: Melina 0:59  
+we're joined by our guest, Irvin Nemos, who's a computer information systems instructor specializing in cybersecurity. Can you tell us what your job entails?
+
+Irvin Nemos 1:09  
+My job entails ethical hacking, wiretapping, digital forensics, malware analysis, malware creation, among many other things in the field of cybersecurity.
+
+Interviewer: Melina 1:19  
+That's a lot of cool things. So ethical hacking, what do you mean by ethical hacking?
+
+Irvin Nemos 1:24  
+I am able to get into machines of any type as long as they're internet connected and prove to business owners, creators, vendors, how someone with malicious intent can get into these machines and cause harm.
+
+# TEACHING APPROACH AND STUDENT ACTIVITIES
+Interviewer: Nick 1:37  
+Now you're an instructor or do you do this as well?
+
+Irvin Nemos 1:40  
+Both.
+
+Interviewer: Nick 1:41  
+You just do both? Okay.
+
+Irvin Nemos 1:42  
+They do both.
+
+# HANDS-ON LABS AND KEY LOGGER EXPLANATION
+Interviewer: Nick 1:43  
+Right. So tell me about instructing. You teach here at Cabrillo?
+
+Irvin Nemos 1:46  
+Yes, I teach here at Cabrillo all the cybersecurity courses that we offer.
+
+Interviewer: Melina 1:51  
+Okay, how do you go about teaching such an interesting topic?
+
+Irvin Nemos 1:57  
+My classes are all hands-on labs. So it's not theory, you're in the practice right away. For example, the students have to use a key logger on each other and get the passwords off of someone else.
+
+Interviewer: Melina 2:13  
+What is the key logger?
+
+Irvin Nemos 2:14  
+A key logger is a tool that records everything you type on a keyboard without letting you know.
+
+# PERSONAL JOURNEY INTO CYBERSECURITY
+
+Interviewer: Melina 2:21  
+And how did you get into this field?
+
+Irvin Nemos 2:24  
+IT is my thing. I love electronics. I love working with machines. And since I was little, I was messing with stuff. IT and cybersecurity were the two that really stuck with me. And there's a great career in it. So not only do I get to do what I like to do and cause mayhem everywhere, but I get paid to do it as well.
+
+Interviewer: Nick 2:42  
+That's awesome. Did you have any formal education?
+
+Irvin Nemos 2:45  
+Yes, I have a Bachelor of Science in cybersecurity.
+
+Interviewer: Nick 2:48  
+Cybersecurity?
+
+Irvin Nemos 2:49  
+Yeah.
+
+Interviewer: Melina 2:51  
+And then, so you said ethical hacker, and what would that mean? 
+
+Irvin Nemos 2:53 There's a lot. Another one is digital forensics.
+
+Irvin Nemos 2:57
+What does that mean?
+
+Irvin Nemos 2:58  
+That means you don't want you delete files off your computer and you think it's gone? It's not. I have the tools and the training to be able to bring any file back from the dead.
+
+# DISCUSSION ON DIGITAL FORENSICS AND MALWARE ANALYSIS
+
+Interviewer: Melina 3:08  
+That's cool. I've definitely deleted something and then regretted it.
+
+Irvin Nemos 3:13  
+Yeah. So without having backups, I can bring anything back up. That's basically the realms of the courts. Now you have physical forensics with like CSI and all that. Well, it's that in the digital realm.
+
+Interviewer: Melina 3:26  
+That's cool. And then your other and
+
+Irvin Nemos 3:29  
+then another one of many is malware analysis. How does the virus work? How does malware act? How does ransomware function? How does it actually mess up a computer and how doesn't it, and being able to dissect it and recreate and
+
+Interviewer: Melina 3:42  
+how does one find malware? Or like, how do you know, like you're not supposed to? And then also, like what is your what is your day like? You're on the computer all day or what are you doing on a computer so
+
+Irvin Nemos 3:54  
+I have different positions. So my day isn't typical between teaching classes, being department chair for the computer information systems department, working in the tech committee here at Cabrillo, being the Bay Area cyber competitions regional coordinator. I have different hats with different things to do. Everywhere, though, the last one that I mentioned, the Regional Coordinator, I run all the cyber competitions for the entire Bay Area, and that's as far north as Santa Rosa Solano marine and as far south as Monterey. I help middle school, high school, community college students get into this field through competitions. I also work with SkillsUSA, the vocational organization. They've been around for like 80-90 years, they do everything vocational, and they just added cybersecurity. I am in charge of making the cybersecurity contests for California and Florida.
+
+# CONSULTING WORK AND MALWARE ANALYSIS
+
+Interviewer: Nick 4:51  
+Wow. Wow, that's awesome. Interesting. So as far as the services that you do, do you do that for like a specific company or do you do it for like multiple companies? How
+
+Irvin Nemos 5:00  
+I consult.
+
+Interviewer: Nick 5:01  
+So like the malware analysis, you someone would come to you with a problem like, yeah,
+
+Irvin Nemos 5:05  
+malware analysis, somebody comes up with a computer and says, "Hey, I need this debug, can you do it?"
+
+Interviewer: Nick 5:11  
+Are you gonna guide them, show them how to do it or just tell them what the whole thing
+
+Irvin Nemos 5:14  
+If I'm consulting it. 
+
+Irvin Nemos  5:14  
+If I'm consulting, im doing it.
+
+Interviewer: Melina  5:15  
+I can’t wrap my mind around this. What skills do you need to do your job, you need
+
+Irvin Nemos  5:22  
+to know how computers work. Number one, you need to know how programs work. And number two, you need to always want to learn because this field changes all the time. And if you cannot, if you don't like to sit in a class, for example, and learn new things every week. This isn't the field for you. This is very research intensive, okay. You're always building on to you're always building on to it, there's always somebody comes up with something new. So you got to catch up to that there are new tools come out or like the NSA does something and then you need to know what's going on.
+
+Interviewer: Melina  5:56  
+You can't just be in your room by yourself computer because then you can't You're known silo. Right?
+
+Irvin Nemos  6:00  
+Right. So there's always something new that come pops up. I mean, the bad guys work together all the time.
+
+Interviewer: Melina  6:06  
+Guys, huh? And then what are your main responsibilities for each of your? Your top three? It's
+
+# DISCUSSION ON ETHICAL HACKING AND INSTRUCTION
+
+Irvin Nemos  6:15  
+your instructor is teaching students these tools?
+
+Interviewer: Melina  6:18  
+And how do you prepare? Like, do you have a lesson plan? Or there's horses for it? Yeah,
+
+Irvin Nemos  6:22  
+there's a whole cybersecurity track. And soon there will be a cybersecurity degree here that somebody can take your listeners can take to go from I know nothing to I know how computers work. I know how they talk to each other. And I know how to secure them and how a bad guy thinks class. Yeah, well, yeah, that's ethical hacking. For the competition's it's getting is building that confidence at the middle school level, that they can do this. And this isn't something in Hollywood, or Yeah, for adults, or this is above. I can't do this stuff. But being able to bring it at their level where it's fun for them, they're interacting with it. And at the same time, they're doing that at a college, because all these competitions happen at community colleges. So they can already as middle schoolers, see where they're yeah, see where they're going to be in high school taking classes in articulation or dual enrollment, getting those credits ahead of time. You're graduating high school, and yet it's right there. Actually, they're
+
+Interviewer: Melina  7:21  
+experiencing? Yeah. Because
+
+Interviewer: Nick  7:23  
+that's really powerful. Having them involved like so early, because it's a really intimidating field. I feel like if you don't have that experience, like introduced to you when you're younger, just Yeah. Also, do you think cybersecurity should be intertwined with computer science? Or should it be its own separate field?
+
+Irvin Nemos  7:39  
+It isn't as major it is, it isn't. So cybersecurity in itself envelops every field that deals with technology, car manufacturing, auto loans, for example, the medical field law, everything, anybody who's using your computer needs to be secured. Just like every car that exists now has an alarm has a key. There's reasons for why every car has a key. Because it needs to be secure. Yeah. So in the same way, everybody with a computer needs to be secure. So it's not necessarily tied to computer science. It's tied to every industry that uses it. Throw in agriculture, they're using IoT devices, Internet of Things devices, in order to track the soil, how wet the soil is, or the nutrients and know that well, what if somebody attacks that and changes the numbers and messes up that farm? A competitor farm a scary thing. That's true. That's happening. Yeah. All data around the world just right. Yeah. interfering. Exactly.
+
+# CHALLENGES AND LEAST ENJOYABLE ASPECTS OF THE JOB  Interviewer: Melina  8:42  
+So what you least enjoy about this job? And what's stressful about it? 
+
+Irvin Nemos  8:47  
+ Nothing, necessarily. 
+
+Interviewer: Melina  8:49  
+Mostly something that annoyed you know, I
+
+Irvin Nemos  8:52  
+mean, paperworks annoying. But, but papers, paperwork? I mean, yeah, you can't get away from paperwork in any job
+
+Interviewer: Melina  9:00  
+Even you working in such a digital realm. You can't 
+
+Irvin Nemos  9:03  
+you have to documentation, you have to show what you did and how you did it. So that someone else can do it. So no, to me, there's nothing. Yeah, it's very minimal.
+
+Interviewer: Nick  9:13  
+Maybe tell me about a some like really difficult tasks that came on your desk and you just have no idea what's going on or like, just it seems like really overwhelming. Anything
+
+Interviewer: Melina  9:22  
+like a project.
+
+Irvin Nemos  9:24  
+I mean, the overwhelming project that we just finished was getting the application filled out to get Cabrillo to become a center for academic excellence in cyber defense, not really related to your job. It is really, because because the NSA and Department of Homeland Security are going to look at the content that we teach, and the materials that we provide and what we do and they're they're gonna look at, they're gonna look at our stuff. They don't look at what they have. And together go Does this match what we want, and if so, they're going to give their seal of approval to further validate what we teach here. Gotcha.
+
+Interviewer: Melina  10:00  
+For those who are just tuning in, you're listening to our show what to be on ks QD 90.7. FM Santa Cruz. I'm Melina and I'm joined by my other hosts, Nick, our show what to be highlights the career journeys of inspirational people in Santa Cruz County. We're speaking with urban Lemos, who is the Computer Information Systems instructor and he specializes in cybersecurity. We were just going over what he didn't like about his job, which was a little bit of paperwork here and there, and the NSA, National Security Agency and Central Security Service.
+
+Irvin Nemos  10:28  
+Also center for academic excellence.
+
+Interviewer: Melina  10:31  
+Is there an acronym for that? Cae? Cae? Okay, that's okay. And so what do you most enjoy about your job?
+
+Irvin Nemos  10:39  
+I get to hack ethically. I get permission to cause mayhem that someone else if they didn't have the permission would go straight to jail because it's criminal. Yeah. So I get to do criminal activity ethically, and you get paid
+ # EARLY PROJECTS AND ETHICAL HACKING 
+Interviewer: Melina  10:53  
+Your paid And it can you tell us more about different projects that you've worked on? or would like to talk about?
+
+Irvin Nemos  10:58  
+Okay, what about me project? Okay. Yeah. that I did with my friends of it was actually, we were just goofing off really went downtown with a bunch of laptops, see what we could find. And we found that at a certain credit union, you could get to the teller machine through the Wi Fi.
+
+Interviewer: Melina  11:17  
+So like, you could get some money out of there. Right.
+
+Irvin Nemos  11:22  
+So we spent that night writing up the documentation of number one, we didn't do this illegally, and don't throw us in jail. Yeah, we? Yeah, we found a security breach. And we and this is how this was our thinking, this is our methodology. These are the tools we use. This is what we did. We documented everything presented that they need to say, you need to fix this. Yeah. Because someone with malicious intent either has or will do something. Because with everything in our mind realm. It's not a if it's
+
+Interviewer: Nick  11:54  
+when Yeah, did you guys know what you were doing going into that or you? 
+
+Irvin Nemos  11:57  
+Were just like, let's see what happens.
+
+Interviewer: Melina  11:58  
+And then were you in college at this time? Yes. Okay. Yeah. Was that one of your first like, real projects?
+
+Irvin Nemos  12:06  
+It wasn't a real project. We just kind of went off to class, see what we could do?
+
+Interviewer: Melina  12:13  
+And it how did the credit union respond?
+
+Irvin Nemos  12:14  
+They didn't like it at first, but then they realized, but then they understood. Yeah, the one of the few people who didn't take long for them to understand we weren't doing this malicious. Yeah. And we're trying to help you out.
+
+Interviewer: Melina  12:26  
+And you wrote up a paper, which is really nice, if you will, that's
+
+Irvin Nemos  12:31  
+that's part of finding a job as part of the craft is documentation, being able, again, to show that you are doing things for the right reasons, not for the wrong reason? Because it's very easy. It's a very thin line between ethical and criminal in my realm,
+
+Interviewer: Melina  12:45  
+can you give an example of what would be crossing the line in that realm?
+
+# ETHICAL VS. CRIMINAL HACKING
+
+Irvin Nemos  12:50  
+So Cabrillo has an IT department. If I launched an attack against the school, without permission, that would be criminal. Okay.
+
+Interviewer: Melina  12:57  
+But with permission, just to see it has
+
+Irvin Nemos  13:02  
+permission, that means I would have to sit with it and tell them okay, this is what I have in mind. This is what this is, these are the steps I'm planning to take. This is the day and time that I'll execute this. Are you okay with this and and with them work together the scope of what's okay, what's not, okay. And with their, with their blessing and approval that and execute the attack? So I'm still doing something criminal, with permission with permission.
+
+Interviewer: Nick  13:27  
+Would you say that things in general right now are pretty secured? We still have a long way to go.
+
+Irvin Nemos  13:33  
+Have you heard of the latest breach?
+
+Interviewer: Melina  13:35  
+No, what's the latest breach,
+
+Irvin Nemos  13:36  
+I just had a number of breaches come out of like more stuff in Dropbox, more Amazon buckets exposed. And not that long ago, there was a breach in Texas for an Amazon bucket who had original documents regarding mortgage loans published out to the world. Wow. That's, I mean, that's like, like a month or so ago. There's breaches happening all the time.
+
+Interviewer: Melina  13:59  
+You just never realize it because people like you are there to fix it. Right, hopefully.
+
+Irvin Nemos  14:04  
+Well, yeah, that's why that's why we're around. Yeah, it's just a matter of getting industry to catch up with us. Yeah.
+
+Interviewer: Melina  14:11  
+Interesting.
+
+Interviewer: Nick  14:12  
+Like you said, showing them like, Oh, here's what's wrong. Here's what I found. And that was in college. Right? So what was what was after what was your first job after college
+
+Interviewer: Melina  14:21  
+with approval and permission?
+
+# FIRST JOB AFTER COLLEGE
+
+Irvin Nemos  14:24  
+Part of an IT company whose job was to do everything it for their clients? So we manage everything from their desktops, to their servers to backup software, their security, everything the whole nine yards.
+
+Interviewer: Nick  14:37  
+Has the job changed since you first got in the industry? to No,
+
+Irvin Nemos  14:42  
+no, it's just gotten more complicated, more complicated, more things.
+
+Interviewer: Melina  14:45  
+Why is it more complicated? 
+
+Irvin Nemos  14:46  
+Internet of Things is now is now around your toaster is connected to the internet. Your fridge is connected to the fridge. I have more data points to watch over then I would have 1015 years ago
+
+Interviewer: Nick  14:59  
+and what data points are you watching over? Like, specifically?
+
+Irvin Nemos  15:02  
+All of them? What information is coming out of these devices? For example, the Google Home and Alexa? Oh, they spill out? Oh, yeah. How do you feel about? I don't have any of those Oh, house. Oh, okay. Listen, everything. They listen to everything, and I push it are those easy to hack? Yes, they are incredibly easy to get into, okay, and see the information that's coming out and just keep a record of it. And then I can see and recreate all your conversations, even though the thing is supposed to not be on here, right. But it's listening to everything you're uttering. That's why it's waiting for you to say the key terms. So it's recording everything you're saying because it has to build a profile of you. And it's been proven that you can take that profile, turn it into a into a computer, and have it have the computer call back in a phishing scam using the voice what? Using your voice to trick people to give money or other stuff. Wow. So you know how you get phone calls every now and then. Yeah, all
+
+Interviewer: Melina  16:01  
+the time. And it's like someone's wasted they didn't even know was me.
+
+Irvin Nemos  16:05  
+But now it is possible to turn your Alexa or Google Home or whatever smart device with a microphone that profile and use that profile in AI to call someone who you know, and trick them to think it's you. Like,
+
+Interviewer: Melina  16:19  
+hey, hey, Bob, what's going on?
+
+# PERSONAL SECURITY MEASURES
+
+Irvin Nemos  16:22  
+Using your profile?
+
+Interviewer: Melina  16:24  
+Yeah that's scary. And then does that apply to I'm sure it applies to phones and laptops, but the same, but you have a phone and laptop? Right? How do you keep those things here?
+
+Irvin Nemos  16:37  
+Well, I my phone, my phone is not a typical phone in, in the hardware in the software sense. What kind of phone do you have? So this is a Google Pixel three, 
+
+Interviewer: Melina  16:46  
+not sponsored, right? 
+
+Irvin Nemos  16:47  
+That's the Google Pixel three. But the Android version and the software that's within it is I have modified it to what extent to the extent that I know when this phone is calling out when it shouldn't. When an app wants too much permission. I block it out. 
+
+Interviewer: Nick  17:06  
+When it's taking information 
+
+Irvin Nemos  17:07  
+when it's trying to get information out without me running the app. It stops automatic.
+
+Interviewer: Melina  17:13  
+But like, aren't there features in the phone that already do it like permissions? permission? Yeah,
+
+Irvin Nemos  17:18  
+but is it but not as strong as I would want. They don't they don't block everything. They don't block everything like GPS is on even though you send it off. Like
+
+Interviewer: Nick  17:26  
+they know, they know, wherever you go.
+
+Irvin Nemos  17:28  
+Oh, like it was found out. I would say like a year or so ago, that Uber the Uber app, it tracks you five minutes after you're done with your drive. You may have closed the app afterwards and saying goodbye to your Uber driver, but it's tracking you where you went in five minutes and sending that information back to Uber. Of course, Uber was like, Oh, that was by accident. Yeah. No. 
+
+Interviewer: Melina  17:54  
+Wonder why would you need that
+
+Interviewer: Nick  17:55  
+what is something they could do with that? I mean, yeah.
+
+Interviewer: Melina  17:58  
+I mean, yeah, from your perspective will be a malicious intent behind that. Just an example.
+
+Irvin Nemos  18:04  
+Tracking people, just just try to people, knowing your location is a dangerous thing, knowing where you are.
+
+# ETHICAL IMPLICATIONS OF TRACKING
+
+Interviewer: Nick  18:12  
+Could it be used as a good thing?
+
+Irvin Nemos  18:15  
+I haven't figured out a good way to like track where you go
+
+Interviewer: Melina  18:18  
+like someone got kidnapped, and then they use that five minutes extra data to find out you weren't tracked?
+
+Irvin Nemos  18:26  
+Did that does that Fitbit keeps track of your location. And that's as long as the device is on it keeps track of your location.
+
+Interviewer: Melina  18:33  
+I think people know that, right.
+
+Irvin Nemos  18:36  
+Some people don't realize that. 
+
+Interviewer: Melina  18:37  
+Tracking your steps, you know that it's tracking it somehow. 
+
+Irvin Nemos  18:41  
+Well, I mean, older, older devices used to have just a little, a little sensor. That would sense when you go up and down. And that count them as steps
+
+Interviewer: Melina  18:51  
+Oh, and nowadays, it's like, oh, now
+
+Irvin Nemos  18:53  
+it's like on the map showing where you go. Yeah, that's, that's bad. Because if somebody gets a hold of that, now they know where you go and what times so you know exactly when that person is not at home. That's,
+
+Interviewer: Melina  19:04  
+that's scary, man. Okay. For those who are just tuning in, you're listening to what to be at ks QD 90.7. FM Santa Cruz. I'm Melina and I'm joined by our other hosts Nick our show what to be highlights the career journeys of inspirational people in Santa Cruz County. And we're speaking with Evan Lemos, who is a computer information systems instructor. And he specializes in cybersecurity and we were just talking about how pretty much every piece of technology tracks you right?
+
+Irvin Nemos  19:34  
+That's what we're getting
+
+Interviewer: Melina  19:35  
+unless you hack into it yourself and,
+
+# FUTURE OF TECHNOLOGY AND CYBERSECURITY
+
+Irvin Nemos  19:37  
+and you know what's happening with it? Yeah.
+
+Interviewer: Nick  19:39  
+Do you think we'll get to a point where we can stop all that and like, no vices will not? They're just always gonna know everything.
+
+Interviewer: Melina  19:46  
+They're always been malicious, do you because we're,
+
+Irvin Nemos  19:48  
+we're building everything to beat the internet connected. So that's so much data. So fast.
+
+Interviewer: Nick  19:57  
+I mean, you've seen the movies is is AI inevitable Like, is it just gonna be He's already
+
+Irvin Nemos  20:01  
+here? Yeah, you're already interacting with it, whether you know it or not every time you do a Google search? Yeah, that's AI now. Yeah.
+
+Interviewer: Melina  20:08  
+And how do you think your industry will change in 10 years and 20 years and so on, as
+
+Irvin Nemos  20:14  
+new things are created, we we adapt?
+
+Interviewer: Nick  20:19  
+Do you think you'll get much, much bigger than what it is just because technology is growing? I mean, everything is gonna be complicated we
+
+Irvin Nemos  20:26  
+had in cybersecurity, you adapt. So we're not necessarily creating new stuff. I mean, we're creating either malicious things or things to fix. But we're more on the on the fixing and adapting side from a
+
+Interviewer: Nick  20:39  
+teaching aspect. I mean, if things are always changing, I mean, how do you like where do you teach, like the ground work? Like the ground level? So
+
+Irvin Nemos  20:47  
+we have, we have courses that cover the groundwork, because a lot of the fundamentals don't change. So we have classes that teach that fundamental the fundamental grounds, and then cybersecurity goes on top, above and beyond.
+
+Interviewer: Nick  21:00  
+Can you give an example of what like a fundamental ground would be
+
+Irvin Nemos  21:03  
+like how devices talk to one another? Now, it's called networking, right? There's a phone in this room, it has a certain kind of cable, that cable is connected to the rest of the Cabrillo network, how does that phone work is very fundamental cybersecurity, malicious or not use that same technology in order to communicate. So if you know how things work, then you know how to break or fix them or how the data flows. And yeah, right, how the data flows? How does it look like on the wire? How does it look like over the air?
+
+# EARLY INSPIRATION AND EDUCATION
+
+Interviewer: Melina  21:33  
+And I'm curious to know, so when you were a kid, did you imagine yourself doing this kind of career? 
+
+Irvin Nemos  21:39  
+No. 
+
+Interviewer: Melina  21:40  
+In what did you think you were going to be doing?
+
+Irvin Nemos  21:43  
+I had depth around different things like any other kid not really knowing what, what you want to do. And by fifth grade, when I got my first computer, I knew it was something with computers. Okay.
+
+Interviewer: Melina  21:53  
+So the computer inspired you? Yeah. And then do you have any mentors or people?
+
+Irvin Nemos  21:59  
+My high school teacher definitely got me underway is at that high school. They taught Computer Repair and Networking. So at the time ROP, CTE was taught, it wasn't all academia.
+
+Interviewer: Melina  22:15  
+What do you mean by that?
+
+Irvin Nemos  22:16  
+schools now are very likely to have to four year track have to do Oh, yeah, it's only like, the lineup and Right, right, they actually had that class, how to repair computer and how computers talk to one another. Like we
+
+Interviewer: Melina  22:29  
+barely are having that now for some coming back. Yeah.
+
+Interviewer: Nick  22:35  
+Yeah, right. Because then introducing kids at a younger age is just more, it's better.
+
+Irvin Nemos  22:39  
+Yeah. So by their high school teacher, a couple of college professors, and some industry, folks,
+
+Interviewer: Nick  22:46  
+if you could go back and do anything different, would you? If I
+
+Irvin Nemos  22:51  
+were to go back, I would get my education at a community college and not at a private school, because I'm still paying my student. Yeah, at the time community colleges were not really advertised in cybersecurity, the only ones who were were like ITT Tech into Verizon, I did not trust I and so I went with a private nonprofit. And I have a big debt.
+
+Interviewer: Melina  23:11  
+Private nonprofit. Yes. And you are still paying off debt. Yeah, I'm a nonprofit. Yeah.
+
+Irvin Nemos  23:17  
+Yeah, but the same exact content taught, there's the stuff that I'm teaching here
+
+Interviewer: Melina  23:25  
+And you can do the first year for free. The first year for
+
+Irvin Nemos  23:27  
+free is our high school students. So yeah, economically. That's the number one thing I would do different.
+
+# MISCONCEPTIONS ABOUT CYBERSECURITY
+
+Interviewer: Melina  23:33  
+And then, before you got into this career, were there any assumptions that you made or heard that were wrong or right? Are things that people think that you do, but you don't actually do? You don't.
+
+Irvin Nemos  23:45  
+So in cybersecurity is not one thing, there are branches of it. Just like it has many branches, and one of them is programming and math. I don't like either. Just they do not like math. And I'm not a fan of programming.
+
+Interviewer: Melina  24:02  
+just what most people assume me because I have no knowledge.
+
+Irvin Nemos  24:06  
+I don't necessarily need a lot of math or programming in order to do the things that I like to do like digital forensics, penetration testing.
+
+# SKILLS AND LANGUAGES IN CYBERSECURITY
+
+Interviewer: Melina  24:16  
+So what kind of skills would you need?
+
+Irvin Nemos  24:18  
+So there's, again, there's different branches. Yeah. So somebody who's really wants to get into malware analysis does need strong programming and math. And if that's your cup of tea, go for it. I for you, I like knowing what's happening on the network, though. Knowing how protocols work, knowing how computers talk to one another, being able to dissect that. That's not math heavy. That is critical thinking that has extensive research, then that is documenting, but not necessarily a lot of math 
+
+Interviewer: Melina  24:48  
+are there, Pardon me? Because I have no idea what any of this is, but are there different languages or Yeah. What do you
+
+Irvin Nemos  24:57  
+many different programming languages? Yeah, what do you say? Primarily, primarily bash and Python.
+
+Interviewer: Melina  25:04  
+You know what that is? I don't know what that is,
+
+Irvin Nemos  25:06  
+two of the many many programming languages? Just too many? Yeah, there's too many.
+
+Interviewer: Melina  25:10  
+And then what would someone who's interested in this career? What should they do as your first step? Yeah,
+
+Irvin Nemos  25:16  
+depending on their age, if they're middle school, high school, join the competitions. The easiest way for someone at that age to enter into this field is through the contest, because they have the support system, they have the resources that are provided by the college consortium in this region. And really the support of the schools and the teachers and whatnot. That's the best the best way for them to get in, get their feet wet, to have some fun. At the very least learn something at the very best start to career high school what we need for middle and high. Both
+
+Interviewer: Nick  25:52  
+those were the hacking competitions. Yes. They were talking about Yes.
+
+Irvin Nemos  25:56  
+For someone who is 18. And up. I would suggest, for example, we do have college competitions, so they could join that. But the core skills needed, right. So you could take the fundamental classes that we have. Cool.
+ # SUMMER CAMPS AND ADDITIONAL RESOURCES 
+Interviewer: Melina  26:10  
+Well, do you have any last things that you want to share with us?
+
+Irvin Nemos  26:15  
+So we do for the Middle School in high school, we do have summer camps that are cybersecurity related. And if anybody's interested, they can go to bass cyber dotnet and in the middle, you'll see Summer Camp 2019. We have for this specific area, we have two camps at the Cabrillo Aptos campus into the Watsonville. Okay, and then what
+
+Interviewer: Melina  26:32  
+last piece of advice would you like to share with our listeners? Either this career related or just general?
+
+# CLOSING REMARKS AND FINAL STATEMENTS
+
+Irvin Nemos  26:41  
+I guess it just in general go with what you like. Because I enjoy doing what I do. I have no problem getting up every morning and saying I'm going to work. This is this isn't something I hate. This is something that I wish Friday to arrive. I enjoy coming to work every day. It's
+
+Interviewer: Melina  26:57  
+great having you here. Irvin, thank you so much for being our guest today. Welcome. And thank you to all of our key squid listeners for tuning into today's career story with your host Melina and Nick on our show what to be with Today's guests are the Nemos who is a computer information systems instructor who specializes in cybersecurity our show what to be highlights the career journeys of inspirational people in Santa Cruz County
+
+Interviewer: Nick  27:20  
+If you have any questions or would like to be on the show send us an email at what to be@ksqd.org If you enjoyed our show, please join us again and 90.7 fm que es que de Santa Cruz at 7pm on Sundays or stream online@ksqd.org And thank you so much for listening
+
+Transcribed by https://otter.ai

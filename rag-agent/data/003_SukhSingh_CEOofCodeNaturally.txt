@@ -1,0 +1,273 @@
+﻿Interviewee: Sukh Singh 
+Industry Sectors: Information and Computer Technologies
+Takeaways: Early self-discovery and interest exploration: Understanding different career paths, Early self-discovery and interest exploration: Exploring personal interests passions and values, Skill development education and deep exploration: Real-life exposure and skill development, Skill development education and deep exploration: Non-traditional career paths, Career pivots reconsideration and development: Integrating different passions or interests
+Source: https://soundcloud.com/what-to-be/interview-with-ceo-of-code-naturally-sukh-singh
+
+# INTRO 
+Interviewer 0:00 
+You're listening to KSQD Santa Cruz at 90.7 FM. My name is Nick and I'm an intern at Your Future is Our Business, a Santa Cruz County nonprofit which helps students ages 10 to 18 explore careers and start their career journey. We provide career expos, panels, guest speakers, and more activities to help youth Explore Careers today. I'm here with my other host Melina. 
+
+
+Hey everyone, our show “What to Be” highlights the career journeys of inspirational people in Santa Cruz County. If you've ever thought, “Hmm, how did they get that job”, or, “What is that job really like”, then keep on listening. We would like to remind listeners that the opinions expressed by today's guests do not necessarily reflect this career in its entirety. 
+
+
+Today we're joined by Suk Singh, who is the CEO of Code Naturally. Can you tell us what your career entails? 
+
+
+Sukh Singh 0:41
+Sure, so as you said I'm the CEO of Code Naturally. On a day-to-day basis, a lot of my work is delegating and creating work for other teammates to carry out. A lot of it is actually interacting with our customers, which is students. And so it's working with students, it's learning what their needs are and trying to understand what motivates them, so that way we can create curriculum and an application that appeals specifically to the group that we're targeting, which is third to eighth graders. 
+
+
+Interviewer 1:08
+And what is Code Naturally? 
+
+
+Sukh Singh 1:10 
+So Code Naturally is a Santa Cruz-based startup. We've been here for over three years. We have developed a curriculum and an application, pretty much hand-in-hand, with students and schools for the last three years. And we've applied what's called the Lean Methodology to developing the app and curriculum. Essentially, it just means that you do a lot of testing, that you build a minimum viable product which is just something that works, that does the core value that you're trying to present to your customer. And you take that to them, you put it in their hands, and you see how they react to it. And you listen to them, and then you kind of go back to the drawing board, you figure out what you can adjust to make it better, and then you release a new iteration as quickly as possible. 
+
+
+And so for our first year that we were working with schools and kids, we didn't charge anybody a penny, because we knew our software and curriculum were pretty bad. But we knew that through working with everybody, we could learn enough to make it much better. 
+
+
+So that's essentially kind of how we've gotten here. It’s by slowly listening to our customers, making our product better, and releasing new iterations. 
+
+
+
+
+# IN THE CLASSROOM
+Interviewer 2:14 
+And schools are now trying, they're now implementing it in the classroom? 
+
+
+Sukh Singh 2:17 
+Yeah, so this year we have, I believe it's six different schools in Santa Cruz County, from Pajaro all the way up to Scotts Valley, where teachers are independently teaching with our software. Where it's teachers that have never taught computer science before. Teachers that come from a social science or English background. And so originally when we started, we thought that our app and our curriculum would fit really well into a math classroom because a lot of the concepts that students are applying fit directly along with common core math for third to eighth grade. But what we found when we started approaching math teachers is that often they were too busy. They had a lot on their plates already and they couldn't really make time for coding. But there were a lot of social science teachers that were really interested in this idea of empathy, this idea of growth mindset, this idea of being like an empathetic learner, and so they took on the challenge of learning to code themselves and they kind of learned to code with their students. And we've actually found that to be kind of the best way forward because then students see their teachers fail, the teachers developing a portfolio along with their students, everyone's at the table. Students are getting to teach their teachers, everyone's kind of getting to go at their own pace and that's okay.
+
+
+And so we've really seen that trend kind of developing as of last year in 2018. And since we've decided that we should really be serving that group and that population, because they are so motivated, and they are so excited. Third to eighth grade, specifically Social Science, English, and history teachers. So teachers that have never programmed before. And that's mainly just so students can see their teachers fail. And so it can pull in those students that have a lot of reservations about math, programming, or engineering. When they see a history or an English or a social science teacher, they can see themselves in that teacher, they can see themselves being like, “You know, I wasn't sure about this, but they weren't really sure about this either”. And I think that gives a lot of those kids buy-in where they might not have had it if it was like, let's say, a math teacher teaching it. Where they might even register for the class because “I hate this algebra class.” 
+
+
+Interviewer 4:22 
+So, you provide coding software and curriculum to teachers and schools, right? And they teach it to their students. 
+
+
+Sukh Singh 4:28
+Exactly. 
+
+
+# HOW IT WORKS
+Interviewer 4:29 
+Okay. And then what kind of coding and software to your brain– like, how complex is it? 
+
+
+Sukh Singh 4:34 
+So we provide students a web application, that essentially means that it's used through a browser. When we originally started developing, we had made a Windows-specific application. But then when we started working with schools, we realized that everyone has Chromebooks. Like everyone has a one-to-one on Chromebooks pretty much. And so we read about the application kind of around the Chromebooks and around tools that schools and teachers already had. And so each student has their own portfolio where they can kind of build their own projects. And so each student can program in JavaScript, they can learn at their own pace, they can make as many projects as they want. There's a beginner and an advanced version where they can kind of like get their bearings, and then move into advanced and start making little applications, games, animations, comics. Like they make really cool stuff in advance. 
+
+
+And so that's the main software that we give the students. And then we have a whole series of lessons broken up over five levels that we give to teachers to distribute to students how they want. And so teachers, essentially, print out worksheets or print out project breakdowns as they need to. And so we originally started, we never assumed that we would be the people that would create that kind of material. We originally thought that we would kind of just create, like a platform where students could be creative and make stuff. But as we started working with kids, we realized if we created that material hand in hand with them, it could make sense specifically for them. And so it's been great to be able to build worksheets and build project outlines, and then actually just hand it to a student and see how they react to it and how they like– they're so blunt. Like, they'll just tell you, “this sucks. This does make any sense”. And you're like, “Okay, cool.” Like, it's perfect feedback. And so you can go back and actually change it. And teachers really seem to benefit from that. A lot of our teachers, you know, make it a point to tell us that they can see that this has been tested before, that they can see that this already works for their students because when their kids get it, they can start using it instantly. 
+
+
+And so that curriculum is provided currently digitally. But for the 2019-2020 school year, we're actually publishing a workbook. So that's our big project. A few of our schools are already using the workbook and like a prototype, and they've given us really good feedback. But the idea is to make the class as similar to teaching social studies history or any class as possible. I think a lot of education technology, and a lot of these big startups, try to reinvent how people do things. And we forget how great teachers already are at teaching. They’re already the experts at that specifically. And so if we can build computer science curriculum in a way that they're used to getting curriculum, and in a way where they're used to structuring a class, that way, it removes that burden from them. And so originally, in our first year and a half, we tried to do that, we tried to rebuild the wheel, and some teachers bought in, and some teachers were willing to do it, but we realize how much strain we were putting on them, and how difficult that is when you have like five or six classes to teach. And so we've kind of switched our perspective. And really, now the curriculum is supposed to be as similar to teaching any other class where it's broken down:  You have your standard alignment, you have something that you can do each day, the reflections that students can do, there's a rubric to grade, students can be working at different levels, but be graded in like some kind of equitable manner, students can actually do presentations, just like they would do in history, where they would put together a Google slide, where they're explaining, like all of the context behind where they got their project idea why they pursued it, what concepts they use. And so, all of that was stuff that we didn't realize that we were gonna have to do until we saw teachers struggling in the classroom. And then it was just thanks to them being super honest. They're like, “All this is really hard for me because of reason a, y, and z.” 
+
+
+Interviewer 8:06
+So you kind of have to incorporate their opinions and their suggestions. You want to work with them, not like stress them out more, or have them put more on their plate. You wanted to kind of integrate it fluidly in the classroom. 
+
+
+Sukh Singh 8:17 
+Exactly. I mean, I think when you talk about innovation, it's always about how something can be so new and so different. But if you think about like all of our, like, favorite innovations, it's like they fit into our life in a way where it's like, seamless. Like, a touchscreen phone is so easy to use. An iPad is so simple, and you pick it up. It's like a lot of the other things that you already do. And so like that's the tweak that we want to provide for teachers. We are super confident that any teacher can teach the class how to program because they can learn it along with them. And a lot of it is about failure. A lot of it is about making mistakes and like I've yet to meet a teacher that's not creative. And so any of them can really build fantastic portfolios. I wish your viewers could actually see the portfolios these teachers make because the projects were pretty hilarious.
+
+
+# CHALLENGES AND FAILURES
+Interviewer  9:10  
+So for those who are just tuning in, you're listening to “What to Be” on KSQD 90.7 FM Santa Cruz. I'm Melina and I'm joined by our other host, Nick. We're speaking with Sukh Singh, who is the CEO of Code Naturally, and he was just telling us about the Code Naturally program curriculum and how mostly third to eighth-grader students and social science English teachers enjoy that more than the math teachers. Right. And also you're about to get into the challenges and the failures, right? Can you tell us more about that? How did you come up with this concept? And what kind of was the drive behind?
+
+
+Sukh Singh 9:49 
+Yeah, sure. So, the drive behind it was I never actually got to see computer science or programming when I was in high school or middle school. I was always really into computers. I was really into hardware stuff. I was the person that would go and fix my friend's computer to the broken, mainly with anti-viruses, right? It's the simplest thing. Yeah. But I never knew that there was a such thing as programming. It just I never connected the dots. And when I got to college, and I took my first class, I failed miserably. And it was the first time that like, failed the class so handedly. It was just the first,  like CS 12A . I mean, there was one easier class that I could have taken that probably should have. My overconfidence really shot me in the foot. But I failed that class and a lot of it was just because I hadn't seen it before. And the way that I approached it, I kept thinking about solving a problem. And I didn't think of it as communicating, which is a lot more like what you're doing when you're programming. You're communicating your intentions through a really a formulated language, right? Like, if you were if you had a friend who was drawing on the board for you, you could just be like, hey, draw a red square on the board, and they would probably get somewhere close to what you wanted, like computers really stupid. So you have to get really specific and be like, “I need you to draw… at this specific point”. Yeah. And that's something that I didn't understand when I took that class. 
+
+
+And so afterwards, I thought that if students could have that experience at a younger age, that things would be different for them. I all I really wanted them to understand was that programming is communicating and not problem-solving. You don't have to think about it as math, There really is a separation. I think students like tell me “I hate math, math is stupid”. They don't hate math, they hate calculating, which is fair, like no one likes calculating right? 
+
+
+Interviewer 11:34
+The computer does that. You're just telling it to do that. 
+
+
+Sukh Singh 11:35
+Exactly, which is the coolest thing about programming.
+
+
+Interviewer 11:39
+So you're just communicating to the machine and that machine communicates to the people, right? 
+
+
+Sukh Singh 11:42 
+Exactly. Like students generally tend to be like, somewhat good at doing proofs, and they can understand how formulas work. A student can tell you how to get the area of a rectangle. Generally speaking, they might get the problem wrong, but the thing is that with a computer, they can program the computer to do each of those steps.
+
+
+Interviewer 11:58
+They can do all the hard parts, right? 
+
+
+Sukh Singh 11:59
+Exactly. And the computer can do the easy parts. And I think it's so easy for our students to feel stupid, because they do a calculation wrong. You feel so dumb when you get something that you think is simple, right? Even if you fold all the right steps, if you forgot to carry one of the numbers, you know what I'm saying– anything simple. At the end of it, you're not going to feel that you've worked really hard, you're going to feel that you're wrong–
+
+
+Interviewer 12:22 
+Because you didn't have a solution, but you went through a whole big process. 
+
+
+Sukh Singh 12:24
+Exactly. You know, mathematics doesn’t highlight that enough. And I think Common Core is a big push to make that more possible to really focus on that process.
+
+
+But yeah, with programming, they can literally do that. They can give their computer each of those step-by-step instructions, and it can just carry it out for them. And that's so much more important to me that a student knows how to do that. That they can understand how to break an idea down into steps, and then communicate that to something else. 
+
+
+# ORIGINAL IDEA AND IMPLEMENTATION
+Interviewer 12:51 
+So how did you come up with coordination? Like, what was your first step? 
+
+
+Sukh Singh 12:54 
+So the original idea was like way stupider than what we have now. It was a Windows Surface application and the idea was– the reason that it's called Code Naturally is that we get to make an app where students can handwrite code, and the app would convert the code to text and then run it. So that way, the idea is that, like, there's a ton of research that shows that writing by hand helps with your memory, you learn way faster, you retain more muscle memory, you slow down, right? That's the main thing that's providing, that you slow down. And so we thought that if students could [handwrite it out]. Exactly, yeah, it was a really dumb hypothesis, right? But like, we spoke to researchers around the world, and they did agree, they were like, “handwriting could help”. And so we thought that'd be the perfect thing for first-graders to third-graders. We were thinking way younger age range, kids that aren't typing yet, you know?
+
+
+And so we built the app. So we actually entered that into a business design competition, and we got like, third place and won $2,000 in that competition. And we used all of that money to incorporate, which was the stupidest thing we could have done. 
+
+
+Interviewer 14:15
+By incorporate you mean like turn yourself into an official– 
+
+
+Sukh Singh 14:17
+Official Corporation? Yeah, we did that in July of 2015. And instantly, it meant that we had to start paying taxes even though we had no revenue profits. We had nothing to sell. We just we just had something on paper.
+
+
+And so we built out that app, and we had a mentor that worked at Microsoft, and so we got to borrow 10 Windows Surfaces to do testing with the app. And Alfie, my CTO, actually got it to work. He like got it where you could like handwrite your text, it would convert it to text, and then it would run it and it would all work. 
+
+
+Interviewer 14:53
+But you had to know what to write down, right? 
+
+
+Sukh Singh 14:55
+Yeah, of course. It was like really basic commands and so we had those like outlined already. And so all of those existed with another programming language that we were using called processing, which is like within Java or JavaScript. And so that already existed, it was just really getting it to the handwriting to text and then to try to run it all. And it worked perfectly, for the most part. It's kind of, you know, obviously, it was an MVP. 
+
+
+But we took it to Branciforte in middle school, because at that time, I was volunteering as an avid tutor with Kathy Standage. She was short a few avid tutors at the time that, and I offered to volunteer. And she learned more about what we did, she invited us to come work with their students. And so at lunch, I brought all 10 of the surfaces, kids would stay in that lunch, and they would like come and test with us. And they were just like brutally honest, we already had a relationship because I had been tutoring them for about a month or two so they were pretty comfortable. They had no reason to be shy. And they were like, “This sucks”. Like, there were so many things like they were like, “I hate how slow this is”, but they liked programming. They liked being able to make stuff with a couple of lines of code like that was of interest to them. And I was the first time that like the majority of them were doing and they were like this is [slow]. But they liked it enough. But most of them prefer typing over writing. They were like “I hate handwriting.”
+
+
+Interviewer 16:18
+So how long ago was this?
+
+
+Sukh Singh 16:20
+That was 2016. 
+
+
+Interviewer 16:21 
+So it wasn't too long. Everyone's kind of moving towards the digital at that point. Yeah.
+
+
+# PROGRAM ITERATION/ NEXT STEP
+Sukh Singh 16:29  
+Yeah, exactly. They were already used to it. And so we got an article I think at the City on a Hill in Santa Cruz tech be at that time. Then Brook Knoll Elementary reached out to us. And we started going to Kathy Peterson's class (two Kathy's, both fantastic people.) 
+
+
+And we started working with her elementary class, it was a class of fourth graders. And so we were able to go in every day for 20 weeks, I think just about, we would go in every week. And that's when I started realizing that I had to create curriculum because I had to go and every day, these kids were learning so much faster than I could have ever anticipated. It was insane. Like, I originally, when we first started doing testing, I thought I had five weeks of curriculum that I had written, and it looked like it would have been fine. Those kids crushed all that within, like five to seven days. 
+
+
+And so like, every night that I had to go back, I was literally at home putting together the next lesson for them. And that led to like our first set of like, you know, worksheets and project outlines, and all that stuff was really just because I had to do it for those kids. And they were really demanding. And, you know, wasn't really gonna be able to say no, but as we started doing testing there, we released a web application instead of like a surface application on the very second iteration. And we made it optional, so you could write or type. And as we started doing testing at Brook Knoll, the other 20 students, because when we attend services, the other 20, students just started getting the URL, and just going on their Chromebooks. And they started programming, like on their own because they didn't care about the handwriting, they cared about just being able to make stuff. Yeah. And that was like, their main concern. They're like, how am I gonna go do that? That's all I care about. And so as more and more of them started doing that, we just started kind of phasing out handwriting, and started focusing on like, how can we? How can we allow them to continue learning through their creativity? Like how can we get them to like, have ideas, and then teach them stuff based on those ideas? Like, how can we get them to want to do something? And then teach it to them afterwards? Because it's like, that's so much easier. Yeah. Yeah, just like a motivation, kind of, like, you know, if I can show you how cool this really can be like, you're, you're gonna be so pumped. And so we realized that like, just by giving them small examples, we could we could do that, whether it was an example of an animation, or a paint project, we showed them that it was possible there was going to be buy-in. 
+
+
+Interviewer 18:48
+Did they drive the curriculum at all?
+
+
+Sukh Singh 18:50
+They entirely drove the curriculum. It was so much of like, I want to know how to do this. And I was like, Okay, let me go figure out exactly how I can communicate that to you in words that you're gonna understand.
+
+
+# BACKGROUND/ CONTEXT
+Interviewer 19:01  
+Did you have any, like, teaching background or anything prior to that? 
+
+
+Sukh Singh 19:05
+Yeah. So I was an avid tutor, my freshman and sophomore year when I was a student at UC Santa Cruz, and then all through high school, I tutored all of my friends in math and English. Yeah, I've always been really passionate about teaching and education in general, 
+
+
+Interviewer 19:19
+What was your major in college? 
+
+
+Sukh Singh 19:21
+I hopped around a lot. I ended as a technology information management major.
+
+
+Interviewer  19:28  
+Okay. For those who are just tuning in, you're listening to “What to Be” on KSQD 90.7. FM, Santa Cruz. I'm Melina and I'm joined by other host, Nick. Today you're speaking with Sukh Singh who is the CEO of Code Naturally, which teaches young children how to code, program, build software, right? And you're just talking about your education and how you jumped around different majors, right? 
+
+
+Sukh Singh 19:53
+Yep. So yeah, I started as I came into college as an applied physics major. It didn't like that at all. And I switched to biochemistry and molecular bio and I liked that a lot more, that was really interesting. But then I took like one startup class under Technology, Information Management. And it just got me super excited, like the idea of putting together a business model the idea of putting together an idea and getting support behind it. And like raising funding, like all of it just seemed so cool. And so I completely jumped ship. And luckily, it was super easy. For me, I finished a lot of my gen Ed's while I was in high school. And so I had a lot of flexibility while I was at UC Santa Cruz. It saves you some time and money.
+
+
+# HESITATE PROGRAM FEATURES
+Interviewer 20:33
+Were you all alone? Creating this company? 
+
+
+Sukh Singh 20:35
+No, absolutely not. So the entire time, I've had my CTO, Alfred Young with me. And he's the guy behind the application key he's learned and built the entire application. And has, has had a hand in every iteration we released. And so it's amazing to see even like to see how much he's developed as a programmer, and how easy it is for us to be able to do things that were impossible before, where it was, like, you know, we might have wanted a feature maybe even a year ago, and that would have been almost impossible. And you know, as technology moves, and as Alfie becomes a more like, prolific programmer, it just becomes possible. And it becomes so much easier. And it's so cool for me to be able to really almost ask for features. And it's like, oh, yeah, we could do that. It's like, oh, sweet, you know, where I was, like, you know, a year or two ago, it was like, it felt like, you know, like, you're walking on glass a little bit, because it's like, oh, as soon as I asked for something that's gonna be 40 to 100 hours of work for somebody. And so you'd be kind of careful, because I, you know, when I started, I definitely made that mistake, where I asked for features, I thought they would be cool, or because the kids really pushed for it. But you know–
+
+
+Interviewer  21:42  
+how do you think through what you need versus what is cool? 
+
+
+Sukh Singh 21:44
+Well, if there has to be a job that that feature does, there has to be something specific that's going to enable for the students. And so if the feature isn't started with that the feature hasn't thought about how are students going to use it? And what is this going to enable them to do? And why is that important? If you can see those three things, we definitely don't need it. And so like, before I get excited about anything, I have to kind of put myself through that test, where it's like, you know, this might sound great, but how is this gonna work? And how is it going to work within the rest of the features that we have? Even like, you know, you can totally make an app just have way too many features. And I can just make it a horrible experience. Right? Yeah. And so sometimes even thinking about, like, if I want to add a feature, what feature Am I willing to let go? Yeah, you know, and so really constraining yourself creatively to really focus it on like, well, what the what's the goal here? For them? It's for them to express themselves creatively. Is this feeding into that main goal? Oh, it's not well, then, you know.
+
+
+Interviewer 22:41
+So keeping that end goal in mind when you're creating it, versus just making things because they're cool?
+
+
+Sukh Singh 22:46
+Exactly, yeah. Which I mean, it's tempting. I mean, like, especially when you're working with kids, like I spend, I would say, at least 15 to 20 hours every week with students that are between third to eighth grade that I've known, that I've seen grow up for the last three years. So they are like, very comfortable in making their demands. But these are also because they've been programming for three years. If I build features, and I build software for those kids, it's gonna make it so much less interesting and less appealing to those students that are just starting. 
+
+
+And so for us, it's so much more important to focus on that first mile experience, what's it going to be like, as you're just starting to program, what allowed our other students to be successful? And so like some things that we've seen is that like, when students can make about eight projects within their first week, then generally speaking, they'll continue to go on to make significantly more, right, if they can successfully write their first couple of lines of code within like five-ish minutes. If they can learn how to copy and paste, right, and so like, for like, as we get ready to release the newest iteration of our app, it's, those are things that I'm focused on, like, how can I get them to have all those little experiences? So that way, they're set up for success, and they feel successful? Because I feel like you know, for us, that's what our goal is, is like, how can we get as many students interested and excited about this? Not just how can we get the students that are really bright, really motivated, and really interested? How can we continue to feed those students, because those students are going to be fine. They're already such prolific learners, it's really everyone else that I think that we need to kind of bring into the fold. 
+And you know, those students that are super advanced, they get so much out of teaching other kids. I think, like for our students that have been with us for two or three years, the best thing for them is trying to have empathy for someone that's just starting, and trying to explain the concepts from their own perspective. 
+
+
+Interviewer 24:30
+So it helps them learn even more. 
+
+
+Sukh Singh 24:32
+Exactly, yeah, it gets them to a deeper level of learning. And then they also get to understand that like, they didn't just arrive here, you know, that they also start at that point, and that this was a difficult path. And that's gonna continue to be difficult. Because like, you know, when you want to make something that's really cool, like the game some of the games that our students want to make a really ambitious some of the apps are really ambitious. And generally speaking, the ones that have been with us for a couple years, they understand that if they want to pursue that, that it's going to be a lot of work that it's going to take over two weeks or over 50 hours for them to do something. And it's crazy to see students as young as third and fourth grade have that kind of commitment. We have a student that made a game from third to fifth grade that finished in fifth grade. And it's an amazing game. It's called Tank Bot. There's like 22 levels, there's a whole tutorial that you can like, do before you play the game. And like it blows my mind. I don't think I've ever made a project that's that impressive or exciting. Yeah. And so I think for me, that's definitely the most exciting part is to see like, what they end up doing with this, and kind of like, where they go from, like, starting to where they end up being in three months, six months? And how, like, how they think about ideas and how they start breaking them down differently. 
+
+
+# JOB DIFFICULTIES
+Interviewer 25:40
+What would you say is the most difficult part of your job? Because you mentioned the highlights? So what's the most, maybe a hurdle you went through? 
+
+
+Sukh Singh 25:49
+Sure. So we're a bootstrap startup. And so that means that we support ourselves through actually generating revenue for the last three years. And as someone that's just kind of like starting up a company, that's very difficult. That's been something that's been a consistent hurdle for us. And like, the only way that we got through our first year was thanks to, you know, thanks to family. And thanks to Airbnb, because we just got really good at doing sheets and Airbnb in our master bedroom. And that totally paid our rent for the entire first year that we did our business. But after that, it was really like, you know, figuring out how can we deliver value right away? Who can we deliver that value to? And how much is a fair price to charge for that. And so, we realized that schools have at least a year-long decision-making cycles. And so those sales were never going to happen fast. But we realized that as we started working with schools, and with kids more and more, there was a ton of demand for computer science and STEM education for kids. And so more and more parents kept asking, Are you guys going to do a summer camp? Are you guys going to do after school? How can my kid keep doing this, they need help to learn this. And so our parents literally told us that they would pay for it. And so we made the program, it was kind of like the opposite of that whole, like, you know, if you build it, they will come. There were already people that were asking for this kind of program. And so we built out summer programs, we built our after school programs. And as they got enrolled, we were able to use that revenue not only to make rent, but to you know, continue to invest into our curriculum and into our application to kind of actually develop something that supports students at any level. And so that's really what the last like two years has been for us.
+
+
+# OUTRO/ ADVICE
+Interviewer 27:27  
+So the last question I have for you is, is there anything that you want to leave our listeners with? Some advice? 
+
+
+Sukh Singh 27:34  
+Absolutely, I would say that if you are going into college to check out your entrepreneurship center, there are a bunch of grants for anyone that's entering community college or university to pursue a business and the government literally gives you money to talk to customers, and to figure it out. I would highly recommend that I wish I had known about that when I started college. If anyone is a parent in Santa Cruz with a third to 10th-grader, you can learn about our summer code camps. They'll be taking place at Krook Knoll and you can learn more at Code Naturally.academy.com 
+
+
+Interviewer 28:05
+Great. Well, thank you again Sukh for being our guest. And thank you to all of our k-squid listeners who are tuning in today to hear Sukh’s story as a CEO of Code Naturally. If you have any questions or like to be on the show, send us an email at whattobe@ksqd.org If you enjoyed our show, please join us again 90.7 FM k-squid Santa Cruz at 7pm on Sundays or stream online at ksqd.org Thank you for listening
