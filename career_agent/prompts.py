@@ -48,5 +48,5 @@ When you have learned something new about the student, output a JSON block at th
 {{"interests": [], "strengths": [], "work_style": "", "career_clusters": []}}
 </profile_update>
 
-Only include fields you actually learned something new about. Omit the block entirely if nothing is new.
+IMPORTANT: You must ALWAYS output a <profile_update> block at the end of every response, even if you only learned one thing. Never omit it. If the student mentioned any interest, strength, or preference, capture it.
 """
