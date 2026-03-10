@@ -121,7 +121,7 @@ def ingest_events_to_pinecone(events: list[CareerEvent]) -> dict:
 def retrieve_career_events(
     query: str,
     industry: Optional[str] = None,
-    location: Optional[str] = None,
+    location: str = "Santa Cruz, CA",
     top_k: int = 5,
     date_weight: float = 0.4,
     similarity_weight: float = 0.6,

@@ -1,7 +1,12 @@
 """
-router.py — YFIOB Router
+router-agent.py — YFIOB Router
 Uses Groq to classify the student's message and dispatch to the right subagent(s).
-No external frameworks — just clean Python function calls.
+
+Subagents:
+  - rag_agent      (Arshia)   — answers career questions from podcast transcripts
+  - memory_agent   (Prithika) — tracks student interests and profile
+  - college_agent  (Pariya)   — college planning and admissions
+  - events_agent   (Arya)     — recommends nearby events and role models
 """
 
 import os
@@ -13,18 +18,21 @@ from groq import Groq
 
 load_dotenv()
 
-# ── Imports ───────────────────────────────────────────────────────────────────
-sys.path.append(os.path.join(os.path.dirname(__file__), "rag-agent"))
-sys.path.append(os.path.join(os.path.dirname(__file__), "career_agent (2)"))
-sys.path.append(os.path.join(os.path.dirname(__file__), "college_subagent"))
+# ── Path setup ────────────────────────────────────────────────────────────────
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(BASE_DIR, "rag-agent"))
+sys.path.append(os.path.join(BASE_DIR, "career_agent"))
+sys.path.append(os.path.join(BASE_DIR, "college_agent"))
+sys.path.append(os.path.join(BASE_DIR, "events_agent"))
 
+# ── Import subagents ──────────────────────────────────────────────────────────
 import app as rag_agent
 from memory import load_profile, init_db
 from agent import run as memory_run
-import college_subagent 
+from events_agent.main import run as events_run
 
 # Uncomment when ready:
-# from events_agent.main import run as events_run
+# import college_agent
 
 # ── Config ────────────────────────────────────────────────────────────────────
 GROQ_API_KEY     = os.environ["GROQ_API_KEY"]
@@ -42,7 +50,6 @@ def _get_groq():
 # ── Step 1: Classify ──────────────────────────────────────────────────────────
 
 def classify(query: str, student_context: dict) -> list[str]:
-    """Use Groq to decide which agents to call."""
     prompt = f"""
 You are a router for a high school career guidance assistant.
 Given a student's message, decide which agents should handle it.
@@ -79,7 +86,6 @@ Only include agents that are clearly relevant. Never include more than 2.
 # ── Step 2: Dispatch ──────────────────────────────────────────────────────────
 
 def dispatch(query: str, agents: list[str], student_context: dict, user_id: str = "") -> dict:
-    """Call each selected agent and collect results."""
     results = {}
 
     for agent in agents:
@@ -91,17 +97,20 @@ def dispatch(query: str, agents: list[str], student_context: dict, user_id: str 
             elif agent == "memory_agent":
                 print(f"🔧 Calling: memory_agent")
                 updated_profile = memory_run(user_id, query)
-                student_context = updated_profile  # update context for subsequent agents
-                results["memory_agent"] = {"response": None}  # memory agent doesn't generate a response
+                student_context.update(updated_profile)
+                results["memory_agent"] = {"response": None}
 
             elif agent == "college_agent":
                 print(f"🔧 Calling: college_agent")
-                results["college_agent"] = college_agent.run(query, student_context)
+                # results["college_agent"] = college_agent.run(query, student_context)
+                results["college_agent"] = {"response": "College agent coming soon!"}
 
             elif agent == "events_agent":
                 print(f"🔧 Calling: events_agent")
-                # results["events_agent"] = events_run(query, student_context)
-                results["events_agent"] = {"response": "Events agent coming soon!"}
+                # Inject location from student context or default to Santa Cruz
+                location = student_context.get("location", "Santa Cruz, CA")
+                enhanced_query = f"{query} location: {location}"
+                results["events_agent"] = events_run(enhanced_query, student_context)
 
         except Exception as e:
             print(f"❌ {agent} failed: {e}")
@@ -113,14 +122,33 @@ def dispatch(query: str, agents: list[str], student_context: dict, user_id: str 
 # ── Step 3: Synthesize ────────────────────────────────────────────────────────
 
 def synthesize(query: str, results: dict, student_context: dict) -> str:
-    """Merge multiple agent responses into one cohesive reply."""
     responses = {
         k: v["response"] for k, v in results.items()
-        if isinstance(v, dict) and "response" in v
+        if isinstance(v, dict) and v.get("response")
     }
 
     if not responses:
-        return "I'm sorry, I wasn't able to find an answer. Could you try rephrasing?"
+        # Only memory_agent was called or no responses — answer from student profile
+        if student_context:
+            profile_str = json.dumps(student_context, indent=2)
+            prompt = f"""
+You are a warm, encouraging career guidance assistant for high school students.
+Answer the student's question using only their profile information below.
+Keep your tone conversational and encouraging.
+
+Student profile:
+{profile_str}
+
+Student question: {query}
+"""
+            resp = _get_groq().chat.completions.create(
+                model=GROQ_MODEL,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.7,
+                max_tokens=400,
+            )
+            return resp.choices[0].message.content
+        return "I don't have enough information about you yet. Tell me a bit about yourself — what are you into?"
 
     if len(responses) == 1:
         return list(responses.values())[0]
@@ -194,6 +222,6 @@ if __name__ == "__main__":
             print("Bye!")
             break
 
-        result = run(query, student_context)
+        result = run(query, student_context, user_id)
         print(f"\nAssistant: {result['response']}")
         print(f"🔀 Agents called: {', '.join(result['agents_called'])}\n")

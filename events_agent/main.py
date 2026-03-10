@@ -60,5 +60,31 @@ async def main():
         if user_input:
             chat(user_input)
 
+def run(query: str, student_context: dict = {}) -> dict:
+    """
+    Single-turn function for the router to call.
+    Takes a question and optional student context, returns a response dict.
+    """
+    # Inject student context into the query if available
+    full_query = query
+    if student_context:
+        ctx = ", ".join(f"{k}: {v}" for k, v in student_context.items())
+        full_query = f"[Student context: {ctx}]\n{query}"
+
+    # Run the async setup and chat in a single event loop
+    async def _run():
+        await setup()
+        content = Content(role="user", parts=[Part(text=full_query)])
+        events = runner.run(
+            user_id=USER_ID, session_id=SESSION_ID, new_message=content
+        )
+        for event in events:
+            if event.is_final_response():
+                return event.content.parts[0].text
+        return "No response from events agent."
+
+    response_text = asyncio.run(_run())
+    return {"response": response_text}
+
 if __name__ == "__main__":
     asyncio.run(main())
