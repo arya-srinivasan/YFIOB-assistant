@@ -3,10 +3,10 @@ router-agent.py — YFIOB Router
 Uses Groq to classify the student's message and dispatch to the right subagent(s).
 
 Subagents:
-  - rag_agent      (Arshia)   — answers career questions from podcast transcripts
-  - memory_agent   (Prithika) — tracks student interests and profile
-  - college_agent  (Pariya)   — college planning and admissions
-  - events_agent   (Arya)     — recommends nearby events and role models
+  - rag_agent      — answers career questions from podcast transcripts
+  - memory_agent   — tracks student interests and profile
+  - college_agent  — college planning and admissions
+  - events_agent   — recommends nearby events and role models
 """
 
 import os
@@ -91,29 +91,29 @@ def dispatch(query: str, agents: list[str], student_context: dict, user_id: str 
     for agent in agents:
         try:
             if agent == "rag_agent":
-                print(f"🔧 Calling: rag_agent")
+                print(f"Calling: rag_agent")
                 results["rag_agent"] = rag_agent.run(query, student_context)
 
             elif agent == "memory_agent":
-                print(f"🔧 Calling: memory_agent")
+                print(f"Calling: memory_agent")
                 updated_profile = memory_run(user_id, query)
                 student_context.update(updated_profile)
                 results["memory_agent"] = {"response": None}
 
             elif agent == "college_agent":
-                print(f"🔧 Calling: college_agent")
+                print(f"Calling: college_agent")
                 # results["college_agent"] = college_agent.run(query, student_context)
                 results["college_agent"] = {"response": "College agent coming soon!"}
 
             elif agent == "events_agent":
-                print(f"🔧 Calling: events_agent")
+                print(f"Calling: events_agent")
                 # Inject location from student context or default to Santa Cruz
                 location = student_context.get("location", "Santa Cruz, CA")
                 enhanced_query = f"{query} location: {location}"
                 results["events_agent"] = events_run(enhanced_query, student_context)
 
         except Exception as e:
-            print(f"❌ {agent} failed: {e}")
+            print(f"{agent} failed: {e}")
             results[agent] = {"error": str(e)}
 
     return results
@@ -202,7 +202,7 @@ def run(query: str, student_context: dict | None = None, user_id: str = "") -> d
 
 if __name__ == "__main__":
     init_db()
-    print("🎓 YFIOB Assistant\n")
+    print("YFIOB Assistant\n")
 
     user_id = input("What's your name? ").strip()
     student_context = load_profile(user_id)
@@ -224,4 +224,4 @@ if __name__ == "__main__":
 
         result = run(query, student_context, user_id)
         print(f"\nAssistant: {result['response']}")
-        print(f"🔀 Agents called: {', '.join(result['agents_called'])}\n")
+        print(f"Agents called: {', '.join(result['agents_called'])}\n")
