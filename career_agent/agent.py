@@ -27,6 +27,28 @@ def clean_response(text: str) -> str:
     text = text.replace("CONVERSATION_COMPLETE", "")
     return text.strip()
 
+def run(user_id: str, query: str) -> dict:
+    profile = load_profile(user_id)
+    system = build_system_prompt(profile)
+
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[
+            {"role": "system", "content": system},
+            {"role": "user", "content": query}
+        ],
+        max_tokens=1024,
+        timeout=10
+    )
+
+    raw = response.choices[0].message.content
+    update = extract_profile_update(raw)
+    if update:
+        profile = merge_profile(profile, update)
+        save_profile(user_id, profile)
+
+    return profile
+
 def run_session(user_id: str):
     profile = load_profile(user_id)
     system = build_system_prompt(profile)
