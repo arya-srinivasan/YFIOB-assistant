@@ -1,6 +1,7 @@
 """
 router.py — YFIOB Router
 Uses Groq to classify the student's message and dispatch to the right subagent(s).
+No external frameworks — just clean Python function calls.
 """
 
 import os
@@ -14,19 +15,21 @@ load_dotenv()
 
 # ── Imports ───────────────────────────────────────────────────────────────────
 sys.path.append(os.path.join(os.path.dirname(__file__), "rag-agent"))
-sys.path.append(os.path.join(os.path.dirname(__file__), "career_agent"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "career_agent (2)"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "college_subagent"))
 
 import app as rag_agent
 from memory import load_profile, init_db
+from agent import run as memory_run
+import college_subagent 
 
 # Uncomment when ready:
-# import college_agent
 # from events_agent.main import run as events_run
 
-# Config
+# ── Config ────────────────────────────────────────────────────────────────────
 GROQ_API_KEY     = os.environ["GROQ_API_KEY"]
 GROQ_MODEL       = "llama-3.3-70b-versatile"
-AVAILABLE_AGENTS = ["rag_agent", "college_agent", "events_agent"]
+AVAILABLE_AGENTS = ["rag_agent", "memory_agent", "college_agent", "events_agent"]
 
 _groq = None
 def _get_groq():
@@ -36,7 +39,7 @@ def _get_groq():
     return _groq
 
 
-# Classify 
+# ── Step 1: Classify ──────────────────────────────────────────────────────────
 
 def classify(query: str, student_context: dict) -> list[str]:
     """Use Groq to decide which agents to call."""
@@ -73,9 +76,9 @@ Only include agents that are clearly relevant. Never include more than 2.
         return ["rag_agent"]
 
 
-# Dispatch  
+# ── Step 2: Dispatch ──────────────────────────────────────────────────────────
 
-def dispatch(query: str, agents: list[str], student_context: dict) -> dict:
+def dispatch(query: str, agents: list[str], student_context: dict, user_id: str = "") -> dict:
     """Call each selected agent and collect results."""
     results = {}
 
@@ -85,10 +88,15 @@ def dispatch(query: str, agents: list[str], student_context: dict) -> dict:
                 print(f"🔧 Calling: rag_agent")
                 results["rag_agent"] = rag_agent.run(query, student_context)
 
+            elif agent == "memory_agent":
+                print(f"🔧 Calling: memory_agent")
+                updated_profile = memory_run(user_id, query)
+                student_context = updated_profile  # update context for subsequent agents
+                results["memory_agent"] = {"response": None}  # memory agent doesn't generate a response
+
             elif agent == "college_agent":
                 print(f"🔧 Calling: college_agent")
-                # results["college_agent"] = college_agent.run(query, student_context)
-                results["college_agent"] = {"response": "College agent coming soon!"}
+                results["college_agent"] = college_agent.run(query, student_context)
 
             elif agent == "events_agent":
                 print(f"🔧 Calling: events_agent")
@@ -102,7 +110,7 @@ def dispatch(query: str, agents: list[str], student_context: dict) -> dict:
     return results
 
 
-# Synthesize
+# ── Step 3: Synthesize ────────────────────────────────────────────────────────
 
 def synthesize(query: str, results: dict, student_context: dict) -> str:
     """Merge multiple agent responses into one cohesive reply."""
@@ -147,12 +155,12 @@ Write a single, cohesive response directly to the student.
 
 # ── Public interface ──────────────────────────────────────────────────────────
 
-def run(query: str, student_context: dict | None = None) -> dict:
+def run(query: str, student_context: dict | None = None, user_id: str = "") -> dict:
     if student_context is None:
         student_context = {}
 
     agents   = classify(query, student_context)
-    results  = dispatch(query, agents, student_context)
+    results  = dispatch(query, agents, student_context, user_id)
     response = synthesize(query, results, student_context)
 
     return {
