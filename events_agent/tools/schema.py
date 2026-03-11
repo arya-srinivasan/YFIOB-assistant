@@ -11,9 +11,10 @@ class CareerEvent(BaseModel):
     date: Optional[str] = None
     end_date: Optional[str] = None
     location: str
+    event_type: str = "general"
     venue: Optional[str] = None
     registration_url: Optional[str] = None
 
     organizer: Optional[str] = None
-    industry: Optional[str] = None
-    target_majors: Optional[str] = None
+    industry: str = "General"
+    target_majors: Optional[list[str]] = None

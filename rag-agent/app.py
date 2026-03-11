@@ -25,6 +25,10 @@ EMBED_MODEL      = "avsolatorio/GIST-large-Embedding-v0"
 GROQ_MODEL       = "llama-3.3-70b-versatile"
 TOP_K            = 4
 
+pc    = Pinecone(api_key=PINECONE_API_KEY)
+index = pc.Index(INDEX_NAME)
+model = SentenceTransformer(EMBED_MODEL) 
+
 VALID_INDUSTRY_SECTORS = {
     "Architecture and Engineering",
     "Agriculture and Natural Resources",
@@ -50,7 +54,8 @@ _groq        = None
 def _get_index():
     global _index
     if _index is None:
-        _index = Pinecone(api_key=PINECONE_API_KEY).Index(INDEX_NAME)
+        pc = Pinecone(api_key=PINECONE_API_KEY)
+        _index = pc.Index(INDEX_NAME)
     return _index
 
 def _get_embed_model():
@@ -155,6 +160,7 @@ def generate_response(query: str, context: str, student_context: dict | None = N
         "Reference them naturally, e.g. 'In a conversation with [Interviewee], ...'. "
         "Keep your tone warm, encouraging, and age-appropriate. "
         "If excerpts don't fully answer the question, say so and offer what you can."
+        "Keep your response concise (max of 5 sentences)."
     )
     user = (
         f"Podcast excerpts:\n\n{context}"
@@ -180,16 +186,13 @@ def run(query: str, student_context: dict | None = None) -> dict:
     """
     Main entry point called by the router agent.
     Returns: { response, sources, industry_filter, top_matches }
-    """
+    """    
     query_obj = build_query_object(query)
     matches   = retrieve(query_obj)
 
     if not matches:
         return {
-            "response": (
-                "I couldn't find relevant podcast content for that question. "
-                "Could you rephrase or ask about a specific career?"
-            ),
+            "response": None,
             "sources":          [],
             "industry_filter":  query_obj["industry_filter"],
             "top_matches":      [],

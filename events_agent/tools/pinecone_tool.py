@@ -34,7 +34,12 @@ def _get_index():
 
 def _build_embed_text(event: CareerEvent) -> str:
     """Combine event fields into a single string for Pinecone to embed."""
-    majors    = ", ".join(event.target_majors) if event.target_majors else ""
+    if isinstance(event.target_majors, list):
+        majors = ", ".join(event.target_majors)
+    elif isinstance(event.target_majors, str):
+        majors = event.target_majors
+    else:
+        majors = ""
     return "\n".join(filter(None, [
         f"Title: {event.title}",
         f"Type: {event.event_type or ''}",
@@ -100,7 +105,11 @@ def ingest_events_to_pinecone(events: list[CareerEvent]) -> dict:
                 "location":         event.location,
                 "venue":            event.venue or "",
                 "industry":         event.industry or "General",
-                "target_majors":    event.target_majors or [],
+                "target_majors": (
+                    event.target_majors if isinstance(event.target_majors, list)
+                    else [event.target_majors] if event.target_majors
+                    else []
+                ),
                 "organizer":        event.organizer or "",
                 "description":      event.description or "",
                 "registration_url": event.registration_url or "",
@@ -121,7 +130,7 @@ def ingest_events_to_pinecone(events: list[CareerEvent]) -> dict:
 def retrieve_career_events(
     query: str,
     industry: Optional[str] = None,
-    location: str = "Santa Cruz, CA",
+    location: str = "California",
     top_k: int = 5,
     date_weight: float = 0.4,
     similarity_weight: float = 0.6,
@@ -134,7 +143,7 @@ def retrieve_career_events(
     # Build metadata filters
     filters = {}
     if industry:            filters["industry"]          = {"$eq": industry}
-    if location:            filters["location"]          = {"$eq": location}
+
 
     results = index.search(
         namespace=NAMESPACE,
@@ -145,8 +154,19 @@ def retrieve_career_events(
         }
     )
 
+    hits = results.get("result", {}).get("hits", [])
+    if not hits and filters:
+        results = index.search(
+            namespace=NAMESPACE,
+            query={
+                "inputs": {"text": query},
+                "top_k": top_k * 2,
+            }
+        )
+        hits = results.get("result", {}).get("hits", [])
+
     ranked = []
-    for match in results.get("result", {}).get("hits", []):
+    for match in hits:
         fields  = match.get("fields", {})
         sim     = match.get("_score", 0)
         d_score = _date_score(fields.get("date", ""))
@@ -169,3 +189,32 @@ def retrieve_career_events(
         ))
 
     return sorted(ranked, key=lambda e: e.score, reverse=True)[:top_k]
+
+def refresh_and_retrieve(
+    query: str,
+    location: str = "California",
+    industry: Optional[str] = None,
+    top_k: int = 3,
+) -> list[RankedEvent]:
+    """
+    Scrape fresh events, upsert to Pinecone, then retrieve relevant ones.
+    Called every time the agent handles a query.
+    """
+    from .google_search_tool import google_search_career_events
+
+    # 1. Scrape fresh events
+    print(f"[pinecone] Refreshing events for '{location}'...")
+    events = google_search_career_events(location=location, industry=industry)
+
+    # 2. Upsert to Pinecone (overwrites by id, so duplicates are safe)
+    result = ingest_events_to_pinecone(events)
+    print(f"[pinecone] Upserted {result['upserted']}, failed {result['failed']}")
+
+    # 3. Retrieve relevant events for the query
+    return retrieve_career_events(
+        query=query,
+        industry=industry,
+        location=location,
+        top_k=top_k,
+    )
+
