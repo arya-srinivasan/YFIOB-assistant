@@ -2,10 +2,6 @@
 main.py — YFIOB Main Workflow
 SequentialAgent: Dispatcher → ParallelAgent → Summarizer
 
-Place this file at the root of the repo alongside all agent folders.
-
-Install deps:
-    pip install google-adk[extensions] litellm groq python-dotenv nest_asyncio
 """
 
 import os
@@ -36,7 +32,7 @@ import app as rag_module
 # from college_subagent import run as college_run
 # from agent import run as memory_run
 
-# ── Config ────────────────────────────────────────────────────────────────────
+# ── Config 
 APP_NAME   = "yfiob_assistant"
 GROQ_MODEL = "llama-3.3-70b-versatile"
 groq       = LiteLlm(model=f"groq/{GROQ_MODEL}")
@@ -184,25 +180,25 @@ summarizer = LlmAgent(
         Combine the following agent responses into one clear, conversational response.
         Only use responses that are not SKIP and not empty and not "coming soon".
         Do not mention the agents or any internal system details.
-        Keep your tone warm, encouraging, and age-appropriate.
+        Keep your tone warm, encouraging.
         If only one response exists, return it directly without modification.
         If all responses are SKIP, say: "I wasn't able to find an answer to that. Could you try rephrasing?"
 
-        **Input Responses:**
+        Input Responses:
 
-        * **Career Advice (from podcasts):**
+        Career Advice (from podcasts):
           {rag_result}
 
-        * **Student Profile:**
+        Student Profile:
           {memory_result}
 
-        * **Events & Role Models:**
+        Events & Role Models:
           {events_result}
 
-        * **College Planning:**
+        College Planning:
           {college_result}
 
-        Output *only* the final combined response. Do not include any headings or labels.
+        Output only the final combined response. Do not include any headings or labels.
     """,
 )
 
@@ -254,7 +250,7 @@ async def chat_async(user_id: str, message: str) -> str:
 
 async def main():
     init_db()
-    print("🎓 YFIOB Assistant\n")
+    print("YFIOB Assistant\n")
 
     user_id = input("What's your name? ").strip()
     student_context = load_profile(user_id)
