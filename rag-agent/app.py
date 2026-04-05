@@ -1,19 +1,25 @@
 """
 app.py
-RAG agent for YFIOB Assistant.
+RAG agent for YFIOB Assistant — built with Google ADK.
 Converts user query → structured query object → filtered Pinecone retrieval → Groq response.
 
 Install deps:
-    pip install pinecone sentence-transformers groq python-dotenv
+    pip install pinecone sentence-transformers groq python-dotenv google-adk[extensions] litellm
 """
 
 import os
 import re
 import ast
+import asyncio
 from dotenv import load_dotenv
 from pinecone import Pinecone
 from sentence_transformers import SentenceTransformer
 from groq import Groq
+from google.adk.agents import Agent
+from google.adk.models.lite_llm import LiteLlm
+from google.adk.runners import Runner
+from google.adk.sessions import InMemorySessionService
+from google.genai import types
 
 load_dotenv()
 
@@ -24,10 +30,9 @@ INDEX_NAME       = "yfiob-rag-agent"
 EMBED_MODEL      = "avsolatorio/GIST-large-Embedding-v0"
 GROQ_MODEL       = "llama-3.3-70b-versatile"
 TOP_K            = 4
-
-pc    = Pinecone(api_key=PINECONE_API_KEY)
-index = pc.Index(INDEX_NAME)
-model = SentenceTransformer(EMBED_MODEL) 
+APP_NAME         = "yfiob_rag"
+USER_ID          = "user"
+SESSION_ID       = "session"
 
 VALID_INDUSTRY_SECTORS = {
     "Architecture and Engineering",
@@ -54,8 +59,7 @@ _groq        = None
 def _get_index():
     global _index
     if _index is None:
-        pc = Pinecone(api_key=PINECONE_API_KEY)
-        _index = pc.Index(INDEX_NAME)
+        _index = Pinecone(api_key=PINECONE_API_KEY).Index(INDEX_NAME)
     return _index
 
 def _get_embed_model():
@@ -71,14 +75,21 @@ def _get_groq():
     return _groq
 
 
-# ── Step 1: Convert query to structured query object ─────────────────────────
+# ── Tool: retrieve from Pinecone ──────────────────────────────────────────────
 
-def build_query_object(query: str) -> dict:
+def retrieve_from_podcasts(query: str, industry: str = "general") -> str:
     """
-    Use Groq to convert a natural language query into a structured object with:
-      - content_string_query: refined search string
-      - industry_filter: list of matching industry sectors
+    Retrieves relevant career advice from real podcast interview transcripts.
+    Use this for any question about careers, professions, job experiences, or career advice.
+
+    Args:
+        query:    The student's career question
+        industry: Optional industry sector to filter by (e.g. 'Health Services, Sciences, Medical Technology')
+
+    Returns:
+        Relevant excerpts from podcast interviews as a formatted string
     """
+    # Build query object using Groq
     prompt = f"""
 You are a query parser for a career guidance assistant.
 Given a student's question, return a JSON object with exactly two fields:
@@ -99,41 +110,31 @@ Student question: {query}
         max_tokens=200,
     )
     raw = resp.choices[0].message.content.strip()
-
-    # Strip markdown fences if model includes them anyway
     raw = re.sub(r"^```[a-z]*\n?", "", raw)
     raw = re.sub(r"\n?```$", "", raw)
 
     try:
         parsed = ast.literal_eval(raw)
     except Exception:
-        # Fallback: no filter, use raw query
         parsed = {"content_string_query": query, "industry_filter": []}
 
-    # Validate industry filters
     parsed["industry_filter"] = [
         s for s in parsed.get("industry_filter", [])
         if s in VALID_INDUSTRY_SECTORS
     ]
-    return parsed
 
-
-# ── Step 2: Retrieve from Pinecone ───────────────────────────────────────────
-
-def retrieve(query_obj: dict, top_k: int = TOP_K) -> list[dict]:
-    vector = _get_embed_model().encode([query_obj["content_string_query"]])[0].tolist()
-    filters = query_obj.get("industry_filter", [])
-
-    kwargs = dict(vector=vector, top_k=top_k, include_metadata=True)
-    if filters:
+    # Retrieve from Pinecone
+    vector  = _get_embed_model().encode([parsed["content_string_query"]])[0].tolist()
+    filters = parsed.get("industry_filter", [])
+    kwargs  = dict(vector=vector, top_k=TOP_K, include_metadata=True)
+    if filters and industry != "general":
         kwargs["filter"] = {"Industry Sectors": {"$in": filters}}
 
-    return _get_index().query(**kwargs)["matches"]
+    matches = _get_index().query(**kwargs)["matches"]
 
+    if not matches:
+        return "No relevant podcast excerpts found for this query."
 
-# ── Step 3: Format context ────────────────────────────────────────────────────
-
-def format_context(matches: list[dict]) -> str:
     parts = []
     for i, m in enumerate(matches):
         meta = m["metadata"]
@@ -145,39 +146,25 @@ def format_context(matches: list[dict]) -> str:
     return "\n\n---\n\n".join(parts)
 
 
-# ── Step 4: Generate response ─────────────────────────────────────────────────
+# ── ADK Agent ─────────────────────────────────────────────────────────────────
 
-def generate_response(query: str, context: str, student_context: dict | None = None) -> str:
-    student_info = ""
-    if student_context:
-        student_info = "\n\nStudent profile:\n" + "\n".join(
-            f"  - {k}: {v}" for k, v in student_context.items()
-        )
+groq_model = LiteLlm(model=f"groq/{GROQ_MODEL}")
 
-    system = (
-        "You are a supportive career guidance assistant for high school students. "
-        "Ground your response in the podcast excerpts provided. "
-        "Reference them naturally, e.g. 'In a conversation with [Interviewee], ...'. "
-        "Keep your tone warm, encouraging, and age-appropriate. "
-        "If excerpts don't fully answer the question, say so and offer what you can."
-        "Keep your response concise (max of 5 sentences)."
-    )
-    user = (
-        f"Podcast excerpts:\n\n{context}"
-        f"{student_info}"
-        f"\n\nStudent question: {query}"
-    )
-
-    resp = _get_groq().chat.completions.create(
-        model=GROQ_MODEL,
-        messages=[
-            {"role": "system", "content": system},
-            {"role": "user",   "content": user},
-        ],
-        temperature=0.7,
-        max_tokens=600,
-    )
-    return resp.choices[0].message.content
+rag_agent = Agent(
+    name="rag_agent",
+    model=groq_model,
+    instruction="""
+        You are a supportive career guidance assistant for high school students.
+        When a student asks about careers, professions, or work experiences:
+        1. Call retrieve_from_podcasts with their question
+        2. Ground your response in the retrieved podcast excerpts
+        3. Reference the interviewee naturally, e.g. 'In a conversation with [Name]...'
+        4. Keep your tone warm, encouraging, and age-appropriate
+        5. Keep your response concise (max 5 sentences)
+        If the excerpts don't fully answer the question, say so honestly and offer what you can.
+    """,
+    tools=[retrieve_from_podcasts],
+)
 
 
 # ── Public interface ──────────────────────────────────────────────────────────
@@ -185,28 +172,37 @@ def generate_response(query: str, context: str, student_context: dict | None = N
 def run(query: str, student_context: dict | None = None) -> dict:
     """
     Main entry point called by the router agent.
-    Returns: { response, sources, industry_filter, top_matches }
-    """    
-    query_obj = build_query_object(query)
-    matches   = retrieve(query_obj)
+    Returns: { response, sources }
+    """
+    # Inject student context into the query
+    full_query = query
+    if student_context:
+        ctx = ", ".join(f"{k}: {v}" for k, v in student_context.items())
+        full_query = f"[Student context: {ctx}]\n{query}"
 
-    if not matches:
-        return {
-            "response": None,
-            "sources":          [],
-            "industry_filter":  query_obj["industry_filter"],
-            "top_matches":      [],
-        }
+    async def _run():
+        session_service = InMemorySessionService()
+        await session_service.create_session(
+            app_name=APP_NAME, user_id=USER_ID, session_id=SESSION_ID
+        )
+        runner = Runner(
+            agent=rag_agent,
+            app_name=APP_NAME,
+            session_service=session_service,
+        )
+        content = types.Content(role="user", parts=[types.Part(text=full_query)])
+        async for event in runner.run_async(
+            user_id=USER_ID, session_id=SESSION_ID, new_message=content
+        ):
+            if event.is_final_response():
+                if event.content and event.content.parts:
+                    return event.content.parts[0].text
+        return None
 
-    context  = format_context(matches)
-    response = generate_response(query, context, student_context)
-    sources  = list({m["metadata"].get("Interviewee", "Unknown") for m in matches})
-
+    response = asyncio.run(_run())
     return {
-        "response":         response,
-        "sources":          sources,
-        "industry_filter":  query_obj["industry_filter"],
-        "top_matches":      matches,
+        "response": response,
+        "sources":  [],
     }
 
 
@@ -223,9 +219,4 @@ if __name__ == "__main__":
             break
 
         result = run(query)
-        print(f"\nAgent: {result['response']}")
-        if result["sources"]:
-            print(f"Sources: {', '.join(result['sources'])}")
-        if result["industry_filter"]:
-            print(f"Industry filter used: {', '.join(result['industry_filter'])}")
-        print()
+        print(f"\nAgent: {result['response']}\n")
