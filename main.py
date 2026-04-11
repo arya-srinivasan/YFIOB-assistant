@@ -1,35 +1,35 @@
 """
 main.py — YFIOB Main Workflow
-SequentialAgent: Dispatcher → ParallelAgent → Summarizer
-
+Uses Google ADK LlmAgent for dispatcher and summarizer.
+Subagents are called directly in Python — no ADK tool calling (avoids Groq incompatibility).
 """
 
 import os
 import sys
+import json
+import re
 import asyncio
-import nest_asyncio
+import time
 from dotenv import load_dotenv
-from google.adk.agents import LlmAgent, SequentialAgent, ParallelAgent
+from google.adk.agents import LlmAgent, SequentialAgent
 from google.adk.models.lite_llm import LiteLlm
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
 
-nest_asyncio.apply()
 load_dotenv()
 
-# ── Path setup ────────────────────────────────────────────────────────────────
+# ── Path setup 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(BASE_DIR, "rag-agent"))
 sys.path.append(os.path.join(BASE_DIR, "career_agent"))
 
-# ── Imports ───────────────────────────────────────────────────────────────────
+# ── Imports 
 from memory import load_profile, init_db
 import app as rag_module
 
-# Uncomment as agents become ready:
-# from events_agent.main import run as events_run
-# from college_subagent import run as college_run
+from events_agent.main import run as events_run
+from college_subagent import run as college_run
 # from agent import run as memory_run
 
 # ── Config 
@@ -40,45 +40,40 @@ groq       = LiteLlm(model=f"groq/{GROQ_MODEL}")
 VALID_AGENTS = ["rag_agent", "memory_agent", "college_agent", "events_agent"]
 
 
-#  Tool functions 
+# ── Subagent functions ────────────────────
 
 def call_rag_agent(query: str) -> str:
-    """
-    Answers career-related questions using real podcast interview transcripts.
-    Use for questions about careers, professions, job experiences, or career advice.
+    try:
+        query_obj = rag_module.build_query_object(query)
+        matches   = rag_module.retrieve(query_obj)
+        if not matches:
+            return "No relevant podcast content found."
+        context  = rag_module.format_context(matches)
+        return rag_module.generate_response(query, context) or "No response."
+    except Exception as e:
+        return f"RAG agent error: {str(e)}"
 
-    Args:
-        query: The student's career question
-    """
-    result = rag_module.run(query)
-    return result.get("response") or "No response from RAG agent."
-
+def call_memory_agent(query: str) -> str:
+    # return memory_run(user_id, query)
+    return None
 
 def call_events_agent(query: str) -> str:
-    """
-    Finds upcoming career events, networking opportunities, and role models.
-    Use for questions about events, meetups, or people to connect with.
-
-    Args:
-        query: The student's question about events or role models
-    """
-    # return events_run(query).get("response") or "No response."
-    return "Events agent coming soon!"
-
+    # return events_run(query).get("response")
+    return None
 
 def call_college_agent(query: str) -> str:
-    """
-    Answers questions about California colleges, majors, and admissions requirements.
-    Use for questions about college planning, applications, or what classes to take.
+    # return college_run(query).get("response")
+    return None
 
-    Args:
-        query: The student's college-related question
-    """
-    # return college_run(query).get("response") or "No response."
-    return "College agent coming soon!"
+AGENT_FUNCTIONS = {
+    "rag_agent":     call_rag_agent,
+    "memory_agent":  call_memory_agent,
+    "events_agent":  call_events_agent,
+    "college_agent": call_college_agent,
+}
 
 
-#  1. Dispatcher 
+# ── ADK Agents (dispatcher + summarizer)
 
 dispatcher = LlmAgent(
     name="dispatcher",
@@ -101,114 +96,20 @@ dispatcher = LlmAgent(
     output_key="selected_agents",
 )
 
-
-# ── 2. Parallel wrapper agents ────────────────────────────────────────────────
-
-rag_wrapper = LlmAgent(
-    name="rag_agent",
-    model=groq,
-    description="Answers career questions from podcast transcripts.",
-    instruction="""
-        Check session state key 'selected_agents'.
-        If 'rag_agent' is in the list, call call_rag_agent with the student's question
-        and output *only* the result.
-        If 'rag_agent' is NOT in the list, output *only*: SKIP
-    """,
-    tools=[call_rag_agent],
-    output_key="rag_result",
-)
-
-memory_wrapper = LlmAgent(
-    name="memory_agent",
-    model=groq,
-    description="Updates and retrieves the student's interest profile.",
-    instruction="""
-        Check session state key 'selected_agents'.
-        If 'memory_agent' is in the list, acknowledge any new interests or goals
-        the student mentioned and output a brief summary.
-        If 'memory_agent' is NOT in the list, output *only*: SKIP
-    """,
-    output_key="memory_result",
-)
-
-events_wrapper = LlmAgent(
-    name="events_agent",
-    model=groq,
-    description="Finds career events and role models.",
-    instruction="""
-        Check session state key 'selected_agents'.
-        If 'events_agent' is in the list, call call_events_agent with the student's question
-        and output *only* the result.
-        If 'events_agent' is NOT in the list, output *only*: SKIP
-    """,
-    tools=[call_events_agent],
-    output_key="events_result",
-)
-
-college_wrapper = LlmAgent(
-    name="college_agent",
-    model=groq,
-    description="Answers college planning and admissions questions.",
-    instruction="""
-        Check session state key 'selected_agents'.
-        If 'college_agent' is in the list, call call_college_agent with the student's question
-        and output *only* the result.
-        If 'college_agent' is NOT in the list, output *only*: SKIP
-    """,
-    tools=[call_college_agent],
-    output_key="college_result",
-)
-
-
-# 3. Parallel workflow 
-
-parallel_workflow = ParallelAgent(
-    name="parallel_workflow",
-    description="Runs all selected subagents concurrently.",
-    sub_agents=[rag_wrapper, memory_wrapper, events_wrapper, college_wrapper],
-)
-
-
-#  4. Summarizer 
-
 summarizer = LlmAgent(
     name="summarizer",
     model=groq,
     description="Combines all agent responses into one final answer.",
-    instruction="""
-        You are a warm, encouraging career guidance assistant for high school students.
-        Combine the following agent responses into one clear, conversational response.
-        Only use responses that are not SKIP and not empty and not "coming soon".
-        Do not mention the agents or any internal system details.
-        Keep your tone warm, encouraging.
-        If only one response exists, return it directly without modification.
-        If all responses are SKIP, say: "I wasn't able to find an answer to that. Could you try rephrasing?"
-
-        Input Responses:
-
-        Career Advice (from podcasts):
-          {rag_result}
-
-        Student Profile:
-          {memory_result}
-
-        Events & Role Models:
-          {events_result}
-
-        College Planning:
-          {college_result}
-
-        Output only the final combined response. Do not include any headings or labels.
-    """,
+    instruction="You are a warm, encouraging career guidance assistant for high school students. Answer the student's question based on the information provided to you.",
 )
 
 
-#  5. Main SequentialAgent 
+# ── Main SequentialAgent ──────────────────────────────────────────────────────
 
 main_agent = SequentialAgent(
     name="yfiob_main",
     description="YFIOB career guidance assistant for high school students.",
-    sub_agents=[dispatcher, parallel_workflow, summarizer],
+    sub_agents=[dispatcher, summarizer],
 )
 
 
@@ -232,9 +133,17 @@ async def setup(user_id: str, student_context: dict):
     )
 
 
-async def chat_async(user_id: str, message: str) -> str:
+async def run_pipeline(user_id: str, message: str) -> str:
+    """
+    Full pipeline:
+    1. ADK dispatcher decides which agents to call
+    2. Python directly calls those agents
+    3. ADK summarizer combines results
+    """
+    # Step Runs dispatcher to get selected agents
     content = types.Content(role="user", parts=[types.Part(text=message)])
-    last_response = None
+    selected_agents = []
+
     async for event in runner.run_async(
         user_id=user_id,
         session_id="session",
@@ -242,7 +151,67 @@ async def chat_async(user_id: str, message: str) -> str:
     ):
         if event.is_final_response():
             if event.content and event.content.parts:
+                raw = event.content.parts[0].text.strip()
+                raw = re.sub(r"^```[a-z]*\n?", "", raw)
+                raw = re.sub(r"\n?```$", "", raw)
+                try:
+                    selected_agents = json.loads(raw)
+                    selected_agents = [a for a in selected_agents if a in VALID_AGENTS]
+                except Exception:
+                    selected_agents = ["rag_agent"]
+            break
+
+    # calling selected agents directly 
+    results = {}
+    for agent in selected_agents:
+        fn = AGENT_FUNCTIONS.get(agent)
+        if fn:
+            results[agent] = fn(message)
+
+    # building summarizer prompt with results injected
+    rag_result     = results.get("rag_agent") or "SKIP"
+    memory_result  = results.get("memory_agent") or "SKIP"
+    events_result  = results.get("events_agent") or "SKIP"
+    college_result = results.get("college_agent") or "SKIP"
+
+    summary_prompt = f"""
+You are a career guidance assistant for high school students.
+Below are responses from specialized agents. 
+If only one agent has a real response (not None, not SKIP, not "coming soon"), return it EXACTLY as-is without any modification.
+If multiple agents have real responses, combine them into one clear conversational response.
+If all responses are None or SKIP, answer the student's question yourself in a warm, encouraging way using your own knowledge.
+Do not add any intro, outro, or extra commentary.
+
+Student question: {message}
+
+Career Advice (from podcasts): {rag_result}
+Student Profile: {memory_result}
+Events & Role Models: {events_result}
+College Planning: {college_result}
+"""
+    # fresh session for summarizer to avoid state conflicts
+    summary_session_id = f"summary_{id(message)}"
+    await session_service.create_session(
+        app_name=APP_NAME,
+        user_id=user_id,
+        session_id=summary_session_id,
+    )
+    summarizer_runner = Runner(
+        agent=summarizer,
+        app_name=APP_NAME,
+        session_service=session_service,
+    )
+    summary_content = types.Content(role="user", parts=[types.Part(text=summary_prompt)])
+    last_response = None
+    async for event in summarizer_runner.run_async(
+        user_id=user_id,
+        session_id=summary_session_id,
+        new_message=summary_content,
+    ):
+        if event.is_final_response():
+            if event.content and event.content.parts:
                 last_response = event.content.parts[0].text
+
     return last_response or "I wasn't able to find an answer. Could you try rephrasing?"
 
 
@@ -270,8 +239,9 @@ async def main():
         if query.lower() in ("quit", "exit", "q"):
             print("Bye!")
             break
-        response = await chat_async(user_id, query)
+        response = await run_pipeline(user_id, query)
         print(f"\nAssistant: {response}\n")
+        time.sleep(2)
 
 
 if __name__ == "__main__":
