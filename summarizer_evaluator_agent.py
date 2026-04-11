@@ -1,6 +1,12 @@
+from dotenv import load_dotenv
+from google.adk.models.lite_llm import LiteLlm
+from google.adk.agents import LlmAgent, SequentialAgent, LoopAgent
+GROQ_API_KEY = os.environ["GROQ_API_KEY"]
+GROQ_MODEL = "llama-3.3-70b-versatile"
+
 summary_agent = LlmAgent(
     name="Generator",
-    model=groq_model,
+    model=GROQ_MODEL,
     instruction="Generate a summary of the following agents. If you receive {feedback}, fix the errors and generate again.",
     output_key="draft"
 )
@@ -46,7 +52,7 @@ Summarized answer: {draft}
 
 evaluator_agent = LlmAgent(
     name="Evaluator",
-    model=groq_model,
+    model=GROQ_MODEL,
     instruction=evaluation_prompt,
     output_key="feedback"
 )
@@ -54,7 +60,7 @@ evaluator_agent = LlmAgent(
 
 refiner_agent = LlmAgent(
     name="Refiner",
-    model=groq_model,
+    model=GROQ_MODEL,
     instruction="""
     You are improving an answer.
 
@@ -79,13 +85,13 @@ refiner_agent = LlmAgent(
 
 optimizer_loop = LoopAgent(
     name="Optimizer",
-    model=groq_model,
+    model=GROQ_MODEL,
     agents=[evaluator_agent, refiner_agent],
     max_iterations=2,
     exit_condition='verdict == "PASS"'
 )
 
 workflow = SequentialAgent(
-    model=groq_model,
+    model=GROQ_MODEL,
     sub_agents=[summary_agent, optimizer_loop],
 )
