@@ -9,6 +9,7 @@ import os
 import sys
 import json
 import asyncio
+import inspect
 from typing import AsyncIterator
 from dotenv import load_dotenv
 
@@ -32,24 +33,20 @@ sys.path.append(os.path.join(BASE_DIR, "career_agent"))
 # ── Imports 
 from memory import load_profile, init_db
 import app as rag_module
-
-# Uncomment as agents become ready:
 from events_agent.main import run as events_run
 from college_subagent import run as college_run
-# from agent import run as memory_run
+from agent import run as memory_run  
 
 # ── Config ────────────────────────────────────────────────────────────────────
-APP_NAME   = "yfiob_assistant"
-GROQ_MODEL = "llama-3.3-70b-versatile"
+APP_NAME     = "yfiob_assistant"
+GROQ_MODEL   = "llama-3.3-70b-versatile"
 VALID_AGENTS = ["rag_agent", "memory_agent", "college_agent", "events_agent"]
 
+# Tracks current user so tool functions can access it without passing through LLM
+_current_user_id: str = ""
 
 
-# GROQ - ADK BRIDGE
-# Subclasses BaseLlm so ADK agents use Groq directly and dont use LiteLLM.
-# Tool calls are handled by converting ADK tool schemas to Groq's format and executing the results back into the ADK response cycle.
-
-
+# ── GroqLlm Bridge ────────────────────────────────────────────────────────────
 class GroqLlm(BaseLlm):
 
     def __init__(self, model: str = GROQ_MODEL):
@@ -87,19 +84,18 @@ class GroqLlm(BaseLlm):
             if text:
                 messages.append({"role": role, "content": text})
 
-        # ── Build Groq tool schemas from ADK tools ────────────────────────────
+        # ── Build tool schemas ────────────────────────────────────────────────
         groq_tools = []
-        tool_map = {}
+        tool_map   = {}
 
         if llm_request.tools_dict:
             for tool_name, tool_obj in llm_request.tools_dict.items():
                 if not hasattr(tool_obj, "func"):
                     continue
                 func = tool_obj.func
-                import inspect
-                sig = inspect.signature(func)
+                sig  = inspect.signature(func)
                 properties = {}
-                required = []
+                required   = []
                 for param_name, param in sig.parameters.items():
                     properties[param_name] = {"type": "string"}
                     if param.default is inspect.Parameter.empty:
@@ -128,7 +124,7 @@ class GroqLlm(BaseLlm):
             max_tokens=1000,
         )
         if groq_tools:
-            kwargs["tools"] = groq_tools
+            kwargs["tools"]       = groq_tools
             kwargs["tool_choice"] = "auto"
 
         completion = await loop.run_in_executor(
@@ -140,7 +136,6 @@ class GroqLlm(BaseLlm):
 
         # ── Handle tool calls ─────────────────────────────────────────────────
         if msg.tool_calls:
-            # Execute each tool call and collect results
             tool_results = []
             for tc in msg.tool_calls:
                 fn   = tool_map.get(tc.function.name)
@@ -148,15 +143,21 @@ class GroqLlm(BaseLlm):
                 result = fn(**args) if fn else f"Tool {tc.function.name} not found."
                 tool_results.append(f"[{tc.function.name}]: {result}")
 
-            # Feed tool results back to Groq for final response
-            messages.append({"role": "assistant", "content": msg.content or "", "tool_calls": [
-                {
-                    "id": tc.id,
-                    "type": "function",
-                    "function": {"name": tc.function.name, "arguments": tc.function.arguments}
-                }
-                for tc in msg.tool_calls
-            ]})
+            messages.append({
+                "role": "assistant",
+                "content": msg.content or "",
+                "tool_calls": [
+                    {
+                        "id": tc.id,
+                        "type": "function",
+                        "function": {
+                            "name": tc.function.name,
+                            "arguments": tc.function.arguments,
+                        },
+                    }
+                    for tc in msg.tool_calls
+                ],
+            })
             for tc, result in zip(msg.tool_calls, tool_results):
                 messages.append({
                     "role": "tool",
@@ -205,6 +206,17 @@ def call_rag_agent(query: str) -> str:
         return rag_module.generate_response(query, ctx) or "No response."
     except Exception as e:
         return f"RAG error: {str(e)}"
+
+
+def call_memory_agent(query: str) -> str:
+    """Updates and retrieves the student's career interest profile."""
+    try:
+        updated_profile = memory_run(_current_user_id, query)
+        if not updated_profile:
+            return "No profile data found."
+        return f"Profile updated: {json.dumps(updated_profile, indent=2)}"
+    except Exception as e:
+        return f"Memory error: {str(e)}"
 
 
 def call_events_agent(query: str) -> str:
@@ -264,9 +276,10 @@ memory_wrapper = LlmAgent(
     description="Updates and retrieves the student's interest profile.",
     instruction="""
 The selected agents are: {selected_agents}
-If 'memory_agent' appears in the selected agents, acknowledge any new interests or goals the student mentioned and output a brief summary.
+If 'memory_agent' appears in the selected agents, call call_memory_agent with the student's question and output *only* the result.
 If 'memory_agent' does NOT appear in the selected agents, output *only*: SKIP
 """,
+    tools=[FunctionTool(call_memory_agent)],  # ← now has a real tool
     output_key="memory_result",
 )
 
@@ -356,7 +369,8 @@ runner: Runner | None = None
 
 
 async def setup(user_id: str, student_context: dict) -> None:
-    global runner
+    global runner, _current_user_id
+    _current_user_id = user_id  # ← set before session so tool functions can use it
     await session_service.create_session(
         app_name=APP_NAME,
         user_id=user_id,
