@@ -13,7 +13,7 @@ import inspect
 from typing import AsyncIterator
 from dotenv import load_dotenv
 
-from google.adk.agents import LlmAgent, SequentialAgent, ParallelAgent
+from google.adk.agents import LlmAgent, SequentialAgent, ParallelAgent, LoopAgent
 from google.adk.models.base_llm import BaseLlm
 from google.adk.models.llm_request import LlmRequest
 from google.adk.models.llm_response import LlmResponse
@@ -35,16 +35,15 @@ from memory import load_profile, init_db
 import app as rag_module
 from events_agent.main import run as events_run
 from college_subagent import run as college_run
-from agent import run as memory_run  
+from agent import run as memory_run 
 
 # ── Config ────────────────────────────────────────────────────────────────────
 APP_NAME     = "yfiob_assistant"
-GROQ_MODEL   = "llama-3.3-70b-versatile"
+GROQ_MODEL = "llama-3.3-70b-versatile"
 VALID_AGENTS = ["rag_agent", "memory_agent", "college_agent", "events_agent"]
 
 # Tracks current user so tool functions can access it without passing through LLM
 _current_user_id: str = ""
-
 
 # ── GroqLlm Bridge ────────────────────────────────────────────────────────────
 class GroqLlm(BaseLlm):
@@ -87,6 +86,8 @@ class GroqLlm(BaseLlm):
         # ── Build tool schemas ────────────────────────────────────────────────
         groq_tools = []
         tool_map   = {}
+
+        print("DEBUG MODEL =", self._groq_model)
 
         if llm_request.tools_dict:
             for tool_name, tool_obj in llm_request.tools_dict.items():
@@ -350,15 +351,89 @@ College Planning:
 
 Output only the final combined response. Do not include any headings or labels.
 """,
+output_key="draft"
 )
 
+evaluator_agent = LlmAgent(
+    name="Evaluator",
+    model=GROQ_MODEL,
+    instruction="""
+You are given a summarized answer to the user query.
+Your task is to evaluate the answer using the following criteria:
+
+EVALUATION CRITERIA:
+- Relevance
+- Correctness
+- Clarity
+- Completeness
+- Coherence
+
+INSTRUCTIONS:
+- Score each criterion from 0 to 1
+- Provide 1–2 sentence justification
+- Return PASS only if all scores >= 0.7 and no critical issues
+- Otherwise return FAIL
+
+OUTPUT FORMAT (JSON ONLY):
+{
+  "relevance": <float>,
+  "correctness": <float>,
+  "clarity": <float>,
+  "completeness": <float>,
+  "coherence": <float>,
+  "verdict": "PASS" | "FAIL",
+  "feedback": "<concise actionable feedback>"
+}
+
+User query:
+{query}
+
+Summarized answer:
+{draft}
+""",
+    output_key="feedback",
+)
+
+refiner_agent = LlmAgent(
+    name="Refiner",
+    model=GROQ_MODEL,
+    instruction="""
+You are improving an answer.
+
+Original answer:
+{draft}
+
+Evaluation feedback:
+{feedback}
+
+TASK:
+- Fix ALL issues mentioned in the feedback
+- Improve correctness, completeness, and clarity
+- Do NOT ignore low-scoring criteria
+- Keep the answer concise but complete
+- Do not mention the feedback in your response
+
+Return ONLY the improved answer.
+""",
+    output_key="final_answer"
+)
+
+optimizer_loop = LoopAgent(
+    name="Optimizer",
+    sub_agents=[evaluator_agent, refiner_agent],
+)
+
+summarizer_workflow = SequentialAgent(
+    name="summarizer_workflow",
+    sub_agents=[summarizer, optimizer_loop],
+)
 
 # ── 5. Main SequentialAgent ───────────────────────────────────────────────────
 
 main_agent = SequentialAgent(
     name="yfiob_main",
     description="YFIOB career guidance assistant for high school students.",
-    sub_agents=[dispatcher, parallel_workflow, summarizer],
+    sub_agents=[dispatcher, parallel_workflow, summarizer_workflow],
 )
 
 
