@@ -356,7 +356,7 @@ output_key="draft"
 
 evaluator_agent = LlmAgent(
     name="Evaluator",
-    model=GROQ_MODEL,
+    model=groq_llm,
     instruction="""
 You are given a summarized answer to the user query.
 Your task is to evaluate the answer using the following criteria:
@@ -396,7 +396,7 @@ Summarized answer:
 
 refiner_agent = LlmAgent(
     name="Refiner",
-    model=GROQ_MODEL,
+    model=groq_llm,
     instruction="""
 You are improving an answer.
 
