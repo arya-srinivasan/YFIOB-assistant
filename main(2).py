@@ -41,7 +41,7 @@ from college_subagent import run as college_run
 
 # ── Config ────────────────────────────────────────────────────────────────────
 APP_NAME   = "yfiob_assistant"
-GROQ_MODEL = "llama-3.3-70b-versatile"
+GROQ_MODEL = "llama-3.1-8b-instant"
 VALID_AGENTS = ["rag_agent", "memory_agent", "college_agent", "events_agent"]
 
 
