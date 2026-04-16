@@ -8,16 +8,16 @@ Original file is located at
 """
 
 # import subagents
-import app as rag_agent
-from memory import load_profile, init_db
-from agent import run as memory_run
+import rag_agent.app as rag_agent
+from career_agent.memory import load_profile, init_db
+from career_agent.agent import run as memory_run
 from events_agent.main import run as events_run
 import college_subagent as college_agent
-
+import os
 #config
 
 GROQ_API_KEY = os.environ["GROQ_API_KEY"]
-GROQ_MODEL = "llama-3.3-70b-versatile"
+GROQ_MODEL = "llama-3.1-8b-instant"
 AVAILABLE_AGENTS = ["rag_agent", "memory_agent", "college_agent", "events_agent"]
 
 AGENT_TYPE_MAP = {
@@ -32,6 +32,14 @@ agent_type = AGENT_TYPE_MAP["college_agent"]
 #evaluator function
 import json
 
+
+from groq import Groq
+
+
+def _get_groq():
+    return Groq(api_key=GROQ_API_KEY)
+
+
 def evaluate_response(user_query, agent_response, agent_type, retrieved_context=None):
     groq = _get_groq()
 
@@ -42,7 +50,6 @@ You will be given:
 - user_query
 - agent_response
 - agent_type
-- retrieved_context (may be None)
 
 Evaluate the response.
 
@@ -74,24 +81,24 @@ INSTRUCTIONS:
 
 OUTPUT FORMAT:
 
-{
-  "scores": {
+{{
+  "scores": {{
     "relevance": 1,
     "correctness": 1,
     "clarity": 1,
     "completeness": 1,
     "coherence": 1
-  },
-  "agent_specific": {},
-  "reasoning": {
+  }},
+  "agent_specific": {{}},
+  "reasoning": {{
     "relevance": "",
     "correctness": "",
     "clarity": "",
     "completeness": "",
     "coherence": ""
-  },
+  }},
   "summary": ""
-}
+}}
 
 INPUT:
 
@@ -100,8 +107,6 @@ user_query: {user_query}
 agent_response: {agent_response}
 
 agent_type: {agent_type}
-
-retrieved_context: {retrieved_context}
 """
 
 # send evaluation prompt to the LLM (groq) -> get response from the prompt
