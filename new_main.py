@@ -300,35 +300,11 @@ If 'college_agent' does NOT appear in the selected agents, output *only*: SKIP
 
 # ── 3. Parallel workflow ──────────────────────────────────────────────────────
 
-
-dispatcher_executor = LlmAgent(
-    name="dispatcher_executor",
-    model=groq_llm1,
-    description="Runs only the selected agents.",
-    instruction="""
-You are given a list of selected agents: {selected_agents}
-
-Call ONLY the tools corresponding to agents in that list.
-- If 'rag_agent' is selected, call call_rag_agent
-- If 'events_agent' is selected, call call_events_agent  
-- If 'college_agent' is selected, call call_college_agent
-- If 'memory_agent' is selected, call call_memory_agent
-
-Compile all tool results into one combined JSON.
-""",
-    tools=[
-        FunctionTool(call_rag_agent),
-        FunctionTool(call_events_agent),
-        FunctionTool(call_college_agent),
-    ],
-    output_key="combined_results",
+parallel_workflow = ParallelAgent(
+    name="parallel_workflow",
+    description="Runs all selected subagents concurrently.",
+    sub_agents=[rag_wrapper, memory_wrapper, events_wrapper, college_wrapper],
 )
-
-# parallel_workflow = ParallelAgent(
-#     name="parallel_workflow",
-#     description="Runs all selected subagents concurrently.",
-#     sub_agents=[rag_wrapper, memory_wrapper, events_wrapper, college_wrapper],
-# )
 
 
 # ── 4. Summarizer ─────────────────────────────────────────────────────────────
@@ -346,8 +322,19 @@ Keep your tone warm and encouraging.
 If only one response exists, return it directly without modification.
 If all responses are SKIP, say: "I wasn't able to find an answer to that. Could you try rephrasing?"
 
-Input responses:
-{combined_results}
+Input responses:'
+
+Career Advice (from podcasts):
+{rag_result}
+
+Student Profile Update:
+{memory_result}
+
+Events & Role Models:
+{events_result}
+
+College Planning:
+{college_result}
 
 Output only the final combined response. Do not include any headings or labels.
 """, 
@@ -416,7 +403,7 @@ Return ONLY the final answer text, no JSON.
 main_agent = SequentialAgent(
     name="yfiob_main",
     description="YFIOB career guidance assistant for high school students.",
-    sub_agents=[dispatcher, dispatcher_executor, summarizer, evaluator_agent, refiner_agent],
+    sub_agents=[dispatcher, parallel_workflow, summarizer, evaluator_agent, refiner_agent],
 )
 
 
@@ -487,7 +474,7 @@ async def chat_async(
         or last_response
         or "I wasn't able to find an answer. Could you try rephrasing?"
     )
-    
+
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 async def main() -> None:
@@ -502,7 +489,7 @@ async def main() -> None:
     else:
         print(f"Nice to meet you, {user_id}!\n")
 
-    await setup(user_id, student_context)
+    await setup()
     print("Type 'quit' to exit\n")
 
     while True:

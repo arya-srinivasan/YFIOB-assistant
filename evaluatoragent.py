@@ -15,9 +15,13 @@ from events_agent.main import run as events_run
 import college_subagent as college_agent
 import os
 #config
+import os
+import json
+from groq import Groq
 
 GROQ_API_KEY = os.environ["GROQ_API_KEY"]
-GROQ_MODEL = "llama-3.1-8b-instant"
+GROQ_MODEL = "llama-3.3-70b-versatile"
+_groq = None
 AVAILABLE_AGENTS = ["rag_agent", "memory_agent", "college_agent", "events_agent"]
 
 AGENT_TYPE_MAP = {
@@ -29,19 +33,17 @@ AGENT_TYPE_MAP = {
 
 agent_type = AGENT_TYPE_MAP["college_agent"]
 
-#evaluator function
-import json
-
-
-from groq import Groq
-
-
 def _get_groq():
-    return Groq(api_key=GROQ_API_KEY)
+    global _groq
+    if _groq is None:
+        _groq = Groq(api_key=os.environ["GROQ_API_KEY"])
+    return _groq
 
-
+#evaluator function
 def evaluate_response(user_query, agent_response, agent_type, retrieved_context=None):
     groq = _get_groq()
+
+    print("\n DEBUG: RUNNING EVALUATION \n")
 
     prompt = f"""
 You are an evaluation agent.
@@ -99,7 +101,6 @@ OUTPUT FORMAT:
   }},
   "summary": ""
 }}
-
 INPUT:
 
 user_query: {user_query}
@@ -117,17 +118,26 @@ agent_type: {agent_type}
     )
 
     raw_output = completion.choices[0].message.content
+    print(f"\n DEBUG: RAW EVALUATION OUTPUT \n {raw_output} \n")
 
-# convert raw_output text to structured output -> python dictionary
+    def clean_json_output(text):
+        text = text.strip()
+        if text.startswith("```"):
+            text = text.replace("```json", "").replace("```", "").strip()
+        return text
+    
+    cleaned_output = clean_json_output(raw_output)
+
+# convert cleaned_output text to structured output -> python dictionary
     try:
-        parsed = json.loads(raw_output)
+        parsed = json.loads(cleaned_output)
         return parsed
     except Exception:
         return {
             "error": "Invalid JSON",
             "raw_output": raw_output
         }
-
+    
 # if below certain threshold, rerun the specific subagent and then evaluate again
 def is_low_quality(evaluation):
     scores = evaluation.get("scores", {})
