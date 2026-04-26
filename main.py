@@ -13,7 +13,7 @@ import inspect
 from typing import AsyncIterator
 from dotenv import load_dotenv
 
-from google.adk.agents import LlmAgent, SequentialAgent, ParallelAgent, LoopAgent
+from google.adk.agents import LlmAgent, SequentialAgent, ParallelAgent, LoopAgent, BaseAgent
 from google.adk.models.base_llm import BaseLlm
 from google.adk.models.llm_request import LlmRequest
 from google.adk.models.llm_response import LlmResponse
@@ -39,7 +39,7 @@ from agent import run as memory_run
 
 # ── Config ────────────────────────────────────────────────────────────────────
 APP_NAME     = "yfiob_assistant"
-GROQ_MODEL = "llama-3.3-70b-versatile"
+GROQ_MODEL = "llama-3.1-8b-instant"
 VALID_AGENTS = ["rag_agent", "memory_agent", "college_agent", "events_agent"]
 
 # Tracks current user so tool functions can access it without passing through LLM
@@ -193,6 +193,62 @@ class GroqLlm(BaseLlm):
 
 groq_llm = GroqLlm(model=GROQ_MODEL)
 
+from typing import Callable, Dict, Any, List
+from google.adk.events import Event
+import asyncio
+
+
+class ToolAgent(BaseAgent):
+    func: Callable
+    output_key: str
+
+    class Config:
+        arbitrary_types_allowed = True
+
+    def __init__(self, name: str, func: Callable, output_key: str, description: str = ""):
+        super().__init__(
+            name=name,
+            description=description,
+            func=func,
+            output_key=output_key
+        )
+
+    # -------------------------
+    # CORE LOGIC
+    # -------------------------
+    def _execute(self, state: Dict[str, Any]) -> Dict[str, Any]:
+        selected = state.get("selected_agents", [])
+        query = state.get("query", "")
+
+        if self.name not in selected:
+            return {self.output_key: ""}
+
+        try:
+            result = self.func(query)
+        except Exception as e:
+            result = f"{self.name} error: {str(e)}"
+
+        return {self.output_key: result}
+
+    # -------------------------
+    # SYNC ENTRY (used by custom flows)
+    # -------------------------
+    def run(self, state: Dict[str, Any]) -> Dict[str, Any]:
+        return self._execute(state)
+
+    # -------------------------
+    # REQUIRED BY ADK (IMPORTANT FIX)
+    # MUST YIELD EVENTS
+    # -------------------------
+    async def _run_async_impl(self, context):
+        result = await asyncio.to_thread(self._execute, context.state)
+
+        # ADK expects EVENT STREAM, not dict
+        yield Event(
+            author=self.name,
+            content=result
+        )
+
 
 # ── Tool functions ────────────────────────────────────────────────────────────
 
@@ -232,6 +288,13 @@ def call_college_agent(query: str) -> str:
     return "College agent coming soon!"
 
 
+AGENT_MAP = {
+    "rag_agent": call_rag_agent,
+    "memory_agent": call_memory_agent,
+    "events_agent": call_events_agent,
+    "college_agent": call_college_agent,
+}
+
 # ── 1. Dispatcher ─────────────────────────────────────────────────────────────
 
 dispatcher = LlmAgent(
@@ -258,56 +321,32 @@ Valid agent names: {VALID_AGENTS}
 
 # ── 2. Parallel wrapper agents ────────────────────────────────────────────────
 
-rag_wrapper = LlmAgent(
+rag_agent = ToolAgent(
     name="rag_agent",
-    model=groq_llm,
-    description="Answers career questions from podcast transcripts.",
-    instruction="""
-The selected agents are: {selected_agents}
-If 'rag_agent' appears in the selected agents, call call_rag_agent with the student's question and output *only* the result.
-If 'rag_agent' does NOT appear in the selected agents, output *only*: SKIP
-""",
-    tools=[FunctionTool(call_rag_agent)],
+    func=call_rag_agent,
     output_key="rag_result",
+    description="Answers career questions from podcast transcripts."
 )
 
-memory_wrapper = LlmAgent(
+memory_agent = ToolAgent(
     name="memory_agent",
-    model=groq_llm,
-    description="Updates and retrieves the student's interest profile.",
-    instruction="""
-The selected agents are: {selected_agents}
-If 'memory_agent' appears in the selected agents, call call_memory_agent with the student's question and output *only* the result.
-If 'memory_agent' does NOT appear in the selected agents, output *only*: SKIP
-""",
-    tools=[FunctionTool(call_memory_agent)],  # ← now has a real tool
+    func=call_memory_agent,
     output_key="memory_result",
+    description="Updates student profile."
 )
 
-events_wrapper = LlmAgent(
+events_agent = ToolAgent(
     name="events_agent",
-    model=groq_llm,
-    description="Finds career events and role models.",
-    instruction="""
-The selected agents are: {selected_agents}
-If 'events_agent' appears in the selected agents, call call_events_agent with the student's question and output *only* the result.
-If 'events_agent' does NOT appear in the selected agents, output *only*: SKIP
-""",
-    tools=[FunctionTool(call_events_agent)],
+    func=call_events_agent,
     output_key="events_result",
+    description="Finds events and role models."
 )
 
-college_wrapper = LlmAgent(
+college_agent = ToolAgent(
     name="college_agent",
-    model=groq_llm,
-    description="Answers college planning and admissions questions.",
-    instruction="""
-The selected agents are: {selected_agents}
-If 'college_agent' appears in the selected agents, call call_college_agent with the student's question and output *only* the result.
-If 'college_agent' does NOT appear in the selected agents, output *only*: SKIP
-""",
-    tools=[FunctionTool(call_college_agent)],
+    func=call_college_agent,
     output_key="college_result",
+    description="Handles college planning questions."
 )
 
 
@@ -315,8 +354,7 @@ If 'college_agent' does NOT appear in the selected agents, output *only*: SKIP
 
 parallel_workflow = ParallelAgent(
     name="parallel_workflow",
-    description="Runs all selected subagents concurrently.",
-    sub_agents=[rag_wrapper, memory_wrapper, events_wrapper, college_wrapper],
+    sub_agents=[rag_agent, memory_agent, events_agent, college_agent]
 )
 
 
@@ -433,7 +471,7 @@ summarizer_workflow = SequentialAgent(
 main_agent = SequentialAgent(
     name="yfiob_main",
     description="YFIOB career guidance assistant for high school students.",
-    sub_agents=[dispatcher, parallel_workflow, summarizer_workflow],
+    sub_agents=[dispatcher, parallel_workflow, summarizer_workflow]
 )
 
 

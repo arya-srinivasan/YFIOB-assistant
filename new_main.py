@@ -321,6 +321,7 @@ Do not mention agents or any internal system details.
 Keep your tone warm and encouraging.
 If only one response exists, return it directly without modification.
 If all responses are SKIP, say: "I wasn't able to find an answer to that. Could you try rephrasing?"
+Keep response to 5 sentences max.
 
 Input responses:'
 
@@ -391,9 +392,21 @@ Original answer:
 Evaluation feedback:
 {feedback}
 
-Parse the feedback JSON. If "verdict" is "PASS", return the original answer UNCHANGED.
-If "verdict" is "FAIL", fix the issues described in "feedback".
-Return ONLY the final answer text, no JSON.
+Parse the feedback JSON.
+
+RULES (STRICT):
+- NEVER explain your reasoning
+- NEVER mention the verdict
+- NEVER add any introductory sentence
+- NEVER say things like "Since the verdict is PASS..."
+- Output must be ONLY the final answer text
+
+LOGIC:
+- If verdict == "PASS": output the original answer EXACTLY as-is
+- If verdict == "FAIL": fix the issues described in feedback and output the improved answer
+
+FINAL OUTPUT:
+Return ONLY the final answer text. No extra sentences before or after.
 """,
     output_key="final_answer"
 )
@@ -434,19 +447,27 @@ async def chat_async(
     if runner is None:
         raise RuntimeError("Call setup() before chat_async().")
 
-    session_id = f"session_{user_id}"  # per-user isolation
+    session_id = f"session_{user_id}"
 
-    # Create session if it doesn't exist (idempotent safe pattern)
-    await session_service.create_session(
+    # ── Ensure session exists (idempotent safe) ─────────────────────────────
+    existing_session = await session_service.get_session(
         app_name=APP_NAME,
         user_id=user_id,
         session_id=session_id,
-        state={
-            "student_context": student_context or {},
-            "query": ""
-        },
     )
 
+    if existing_session is None:
+        await session_service.create_session(
+            app_name=APP_NAME,
+            user_id=user_id,
+            session_id=session_id,
+            state={
+                "student_context": student_context or {},
+                "query": ""
+            },
+        )
+
+    # ── Build user message ──────────────────────────────────────────────────
     content = genai_types.Content(
         role="user",
         parts=[genai_types.Part(text=query)]
@@ -454,6 +475,7 @@ async def chat_async(
 
     last_response = None
 
+    # ── Run agent ───────────────────────────────────────────────────────────
     async for event in runner.run_async(
         user_id=user_id,
         session_id=session_id,
@@ -463,6 +485,7 @@ async def chat_async(
             if event.content and event.content.parts:
                 last_response = event.content.parts[0].text
 
+    # ── Fetch session state ─────────────────────────────────────────────────
     session = await session_service.get_session(
         app_name=APP_NAME,
         user_id=user_id,
@@ -504,7 +527,7 @@ async def main() -> None:
         
         #CHANGE TO EVAL
         result = await chat_async(user_id, query)
-        print(f"\nAssistant: {result}\n")  # not result['response']
+        print(f"\nAssistant: {result}\n") 
 
 if __name__ == "__main__":
     asyncio.run(main())
