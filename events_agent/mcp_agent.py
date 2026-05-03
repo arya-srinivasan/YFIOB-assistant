@@ -5,6 +5,7 @@ from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset
 from google.adk.tools.mcp_tool.mcp_session_manager import StdioConnectionParams
 from mcp import StdioServerParameters
 from dotenv import load_dotenv
+from .mcp_server import mcp
 
 load_dotenv()
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
@@ -60,7 +61,7 @@ agent = Agent(
             connection_params=StdioConnectionParams(
                 server_params=StdioServerParameters(
                     command="uvx",
-                    args=["linkedin-scraper-mcp@latest"],
+                    args=[mcp],
                     env={**os.environ, "UV_HTTP_TIMEOUT": "300"},
                 ),
                 timeout=120,
