@@ -25,30 +25,23 @@ from groq import Groq
 
 load_dotenv()
 
-# ── Path setup 
+# ── Path setup
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(BASE_DIR, "rag-agent"))
 sys.path.append(os.path.join(BASE_DIR, "career_agent"))
 
-# ── Imports 
+# ── Imports
 from career_agent.memory import load_profile, init_db
-import rag_agent.app as rag_module
+sys.path.append(os.path.join(BASE_DIR, "rag-agent"))
+import app as rag_module
 
-# Uncomment as agents become ready:
 from events_agent.main import run as events_run
 from college_subagent import run as college_run
-# from agent import run as memory_run
 
-# ── Config ────────────────────────────────────────────────────────────────────
+# ── Config
 APP_NAME   = "yfiob_assistant"
 GROQ_MODEL = "llama-3.3-70b-versatile"
 VALID_AGENTS = ["rag_agent", "memory_agent", "college_agent", "events_agent"]
-
-
-
-# GROQ - ADK BRIDGE
-# Subclasses BaseLlm so ADK agents use Groq directly and dont use LiteLLM.
-# Tool calls are handled by converting ADK tool schemas to Groq's format and executing the results back into the ADK response cycle.
 
 
 class GroqLlm(BaseLlm):
@@ -68,7 +61,6 @@ class GroqLlm(BaseLlm):
         stream: bool = False,
     ) -> AsyncIterator[LlmResponse]:
 
-        # ── Build messages ────────────────────────────────────────────────────
         messages = []
 
         if llm_request.config and llm_request.config.system_instruction:
@@ -88,7 +80,6 @@ class GroqLlm(BaseLlm):
             if text:
                 messages.append({"role": role, "content": text})
 
-        # ── Build Groq tool schemas from ADK tools ────────────────────────────
         groq_tools = []
         tool_map = {}
 
@@ -120,7 +111,6 @@ class GroqLlm(BaseLlm):
                 })
                 tool_map[tool_name] = func
 
-        # ── Call Groq ─────────────────────────────────────────────────────────
         loop = asyncio.get_event_loop()
         kwargs = dict(
             model=self._groq_model,
@@ -139,9 +129,7 @@ class GroqLlm(BaseLlm):
         choice = completion.choices[0]
         msg    = choice.message
 
-        # ── Handle tool calls ─────────────────────────────────────────────────
         if msg.tool_calls:
-            # Execute each tool call and collect results
             tool_results = []
             for tc in msg.tool_calls:
                 fn   = tool_map.get(tc.function.name)
@@ -149,7 +137,6 @@ class GroqLlm(BaseLlm):
                 result = fn(**args) if fn else f"Tool {tc.function.name} not found."
                 tool_results.append(f"[{tc.function.name}]: {result}")
 
-            # Feed tool results back to Groq for final response
             messages.append({"role": "assistant", "content": msg.content or "", "tool_calls": [
                 {
                     "id": tc.id,
@@ -177,7 +164,6 @@ class GroqLlm(BaseLlm):
         else:
             text_out = msg.content or ""
 
-        # ── Yield ADK response ────────────────────────────────────────────────
         async def _iter():
             yield LlmResponse(
                 content=genai_types.Content(
@@ -193,7 +179,7 @@ class GroqLlm(BaseLlm):
 groq_llm1 = GroqLlm(model=GROQ_MODEL)
 groq_llm2 = GroqLlm(model="llama-3.1-8b-instant")
 
-# ── Tool functions ────────────────────────────────────────────────────────────
+# ── Tool functions ─────────────────────────────────────────────────────────────
 
 def call_rag_agent(query: str) -> str:
     """Answers career questions using real podcast interview transcripts."""
@@ -210,13 +196,11 @@ def call_rag_agent(query: str) -> str:
 
 def call_events_agent(query: str) -> str:
     """Finds upcoming career events, networking opportunities, and role models."""
-    # return events_run(query).get("response") or "No response."
     return "Events agent coming soon!"
 
 
 def call_college_agent(query: str) -> str:
     """Answers questions about California colleges, majors, and admissions."""
-    # return college_run(query).get("response") or "No response."
     return "College agent coming soon!"
 
 
@@ -230,11 +214,16 @@ dispatcher = LlmAgent(
 You are a router for a high school career guidance assistant.
 Given a student's message, decide which agents should handle it.
 
+Student profile so far: {{student_context}}
+
 Available agents:
 - rag_agent:     answers career questions using real podcast transcripts and stories
 - memory_agent:  updates or retrieves the student's interest profile and preferences
 - college_agent: answers questions about colleges, majors, requirements, applications
 - events_agent:  recommends nearby events, internships, or role models to meet
+
+If student_context is empty, always include memory_agent.
+If career_goals are already known, skip memory_agent unless student mentions something new.
 
 Respond with ONLY a JSON array of agent names, e.g.: ["rag_agent"]
 Only include agents that are clearly relevant. Never include more than 2.
@@ -244,7 +233,7 @@ Valid agent names: {VALID_AGENTS}
 )
 
 
-# ── 2. Parallel wrapper agents ────────────────────────────────────────────────
+# ── 2. Parallel wrapper agents ─────────────────────────────────────────────────
 
 rag_wrapper = LlmAgent(
     name="rag_agent",
@@ -298,7 +287,7 @@ If 'college_agent' does NOT appear in the selected agents, output *only*: SKIP
 )
 
 
-# ── 3. Parallel workflow ──────────────────────────────────────────────────────
+# ── 3. Parallel workflow ───────────────────────────────────────────────────────
 
 parallel_workflow = ParallelAgent(
     name="parallel_workflow",
@@ -323,8 +312,6 @@ If only one response exists, return it directly without modification.
 If all responses are SKIP, say: "I wasn't able to find an answer to that. Could you try rephrasing?"
 Keep response to 5 sentences max.
 
-Input responses:'
-
 Career Advice (from podcasts):
 {rag_result}
 
@@ -338,8 +325,8 @@ College Planning:
 {college_result}
 
 Output only the final combined response. Do not include any headings or labels.
-""", 
-output_key="draft"
+""",
+    output_key="draft"
 )
 
 
@@ -428,9 +415,6 @@ runner: Runner | None = None
 
 async def setup() -> None:
     global runner
-
-    # Initialize session service baseline session (optional but safe)
-    # NOTE: no user_id here — this is global system setup
     runner = Runner(
         agent=main_agent,
         app_name=APP_NAME,
@@ -449,7 +433,7 @@ async def chat_async(
 
     session_id = f"session_{user_id}"
 
-    # ── Ensure session exists (idempotent safe) ─────────────────────────────
+    # ── Ensure session exists ────────────────────────────────────────────────
     existing_session = await session_service.get_session(
         app_name=APP_NAME,
         user_id=user_id,
@@ -467,7 +451,15 @@ async def chat_async(
             },
         )
 
-    # ── Build user message ──────────────────────────────────────────────────
+    # ── Update session state with current query ──────────────────────────────
+    session = await session_service.get_session(
+        app_name=APP_NAME,
+        user_id=user_id,
+        session_id=session_id,
+    )
+    session.state["query"] = query
+
+    # ── Build user message ───────────────────────────────────────────────────
     content = genai_types.Content(
         role="user",
         parts=[genai_types.Part(text=query)]
@@ -475,7 +467,7 @@ async def chat_async(
 
     last_response = None
 
-    # ── Run agent ───────────────────────────────────────────────────────────
+    # ── Run agent ────────────────────────────────────────────────────────────
     async for event in runner.run_async(
         user_id=user_id,
         session_id=session_id,
@@ -485,18 +477,25 @@ async def chat_async(
             if event.content and event.content.parts:
                 last_response = event.content.parts[0].text
 
-    # ── Fetch session state ─────────────────────────────────────────────────
+    # ── Fetch session state ──────────────────────────────────────────────────
     session = await session_service.get_session(
         app_name=APP_NAME,
         user_id=user_id,
         session_id=session_id,
     )
 
+    # ── Write memory result back to student context ──────────────────────────
+    if session.state.get("memory_result") and session.state["memory_result"] != "SKIP":
+        current_context = session.state.get("student_context", {})
+        current_context["last_memory"] = session.state["memory_result"]
+        session.state["student_context"] = current_context
+
     return (
         session.state.get("final_answer")
         or last_response
         or "I wasn't able to find an answer. Could you try rephrasing?"
     )
+
 
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
@@ -522,14 +521,8 @@ async def main() -> None:
         if query.lower() in ("quit", "exit", "q"):
             print("Bye!")
             break
-        #response = await chat_async(user_id, query)
-        #print(f"\nAssistant: {response}\n")
-        
-        #CHANGE TO EVAL
         result = await chat_async(user_id, query)
-        print(f"\nAssistant: {result}\n") 
+        print(f"\nAssistant: {result}\n")
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-
