@@ -16,6 +16,8 @@ from google.adk.runners import Runner
 from google.adk.tools import FunctionTool
 from google.genai import types
 
+from college_cache import redis_client, CACHE_TTL
+
 load_dotenv()
 
 # ── Config ────────────────────────────────────────────────────────────────────
@@ -25,7 +27,17 @@ SESSION_ID = "session_001"
 
 
 def scrape_college_website(url: str) -> str:
-    try:
+    
+    cache_key = f"college:url:{url}"
+    cached = redis_client.get(cache_key)
+    
+    if cached:
+        print(f"[SCRAPE CACHE HIT] {url}") # just for debugging
+        return cached
+
+    try: # this is like the else block but with error handling
+        print(f"[SCRAPING] {url}")
+
         headers = {"User-Agent": "Mozilla/5.0"}
         resp = requests.get(url, headers=headers, timeout=10)
         resp.raise_for_status()
@@ -35,7 +47,11 @@ def scrape_college_website(url: str) -> str:
             tag.decompose()
         text = soup.get_text(separator="\n", strip=True)
         # Truncate to avoid token overflow
-        return text[:4000]
+        text = text[:4000]
+
+        redis_client.setex(cache_key, CACHE_TTL, text)
+        return text
+
     except Exception as e:
         return f"Error scraping {url}: {e}"
 
