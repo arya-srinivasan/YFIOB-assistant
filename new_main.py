@@ -35,7 +35,7 @@ from career_agent.memory import load_profile, init_db
 sys.path.append(os.path.join(BASE_DIR, "rag-agent"))
 import app as rag_module
 
-from events_agent.main import run as events_run
+from events_agent.mcp_agent import run as events_run
 from college_subagent import run as college_run
 
 # ── Config
@@ -196,7 +196,11 @@ def call_rag_agent(query: str) -> str:
 
 def call_events_agent(query: str) -> str:
     """Finds upcoming career events, networking opportunities, and role models."""
-    return "Events agent coming soon!"
+    try:
+        result = events_run(query)
+        return result.get("response") or "No career data found."
+    except Exception as e:
+        return f"Events agent error: {str(e)}"
 
 
 def call_college_agent(query: str) -> str:

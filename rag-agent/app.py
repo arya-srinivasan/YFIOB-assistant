@@ -1,7 +1,6 @@
 """
 app.py
 RAG agent for YFIOB Assistant — built with Google ADK.
-Converts user query → structured query object → filtered Pinecone retrieval → Groq response.
 
 Install deps:
     pip install pinecone sentence-transformers groq python-dotenv google-adk[extensions] litellm
@@ -75,21 +74,17 @@ def _get_groq():
     return _groq
 
 
-# ── Tool: retrieve from Pinecone ──────────────────────────────────────────────
+# ── Tool ──────────────────────────────────────────────────────────────────────
 
 def retrieve_from_podcasts(query: str, industry: str = "general") -> str:
     """
     Retrieves relevant career advice from real podcast interview transcripts.
-    Use this for any question about careers, professions, job experiences, or career advice.
+    Use this for any question about careers, professions, or job experiences.
 
     Args:
         query:    The student's career question
-        industry: Optional industry sector to filter by (e.g. 'Health Services, Sciences, Medical Technology')
-
-    Returns:
-        Relevant excerpts from podcast interviews as a formatted string
+        industry: Optional industry sector to filter by
     """
-    # Build query object using Groq
     prompt = f"""
 You are a query parser for a career guidance assistant.
 Given a student's question, return a JSON object with exactly two fields:
@@ -123,7 +118,6 @@ Student question: {query}
         if s in VALID_INDUSTRY_SECTORS
     ]
 
-    # Retrieve from Pinecone
     vector  = _get_embed_model().encode([parsed["content_string_query"]])[0].tolist()
     filters = parsed.get("industry_filter", [])
     kwargs  = dict(vector=vector, top_k=TOP_K, include_metadata=True)
@@ -139,42 +133,118 @@ Student question: {query}
     for i, m in enumerate(matches):
         meta = m["metadata"]
         parts.append(
-            f"[Excerpt {i+1} — {meta.get('Interviewee', 'Unknown')} "
-            f"({', '.join(meta.get('Industry Sectors', []))}) "
-            f"relevance: {round(m['score'], 3)}]\n{meta['content']}"
+            f"[{meta.get('Interviewee', 'Unknown')} "
+            f"({', '.join(meta.get('Industry Sectors', []))})]\n{meta['content']}"
         )
     return "\n\n---\n\n".join(parts)
 
 
 # ── ADK Agent ─────────────────────────────────────────────────────────────────
 
-groq_model = LiteLlm(model=f"groq/{GROQ_MODEL}")
-
 rag_agent = Agent(
     name="rag_agent",
-    model=groq_model,
+    model=LiteLlm(model=f"groq/{GROQ_MODEL}"),
     instruction="""
         You are a supportive career guidance assistant for high school students.
         When a student asks about careers, professions, or work experiences:
-        1. Call retrieve_from_podcasts with their question
-        2. Ground your response in the retrieved podcast excerpts
-        3. Reference the interviewee naturally, e.g. 'In a conversation with [Name]...'
-        4. Keep your tone warm, encouraging, and age-appropriate
-        5. Keep your response concise (max 5 sentences)
-        If the excerpts don't fully answer the question, say so honestly and offer what you can.
+        - Call retrieve_from_podcasts with their question
+        - Ground your response in the retrieved podcast excerpts
+        - Reference the interviewee naturally, e.g. 'In a conversation with [Name]...'
+        - Keep your tone warm, encouraging, and age-appropriate
+        - Keep your response concise (max 5 sentences)
+        If the excerpts don't fully answer the question, say so honestly.
     """,
     tools=[retrieve_from_podcasts],
 )
 
 
-# ── Public interface ──────────────────────────────────────────────────────────
+# ── Public functions (called directly by main.py) ─────────────────────────────
 
-def run(query: str, student_context: dict | None = None) -> dict:
-    """
-    Main entry point called by the router agent.
-    Returns: { response, sources }
-    """
-    # Inject student context into the query
+def build_query_object(query: str) -> dict:
+    prompt = f"""
+You are a query parser for a career guidance assistant.
+Given a student's question, return a JSON object with exactly two fields:
+1. "content_string_query": a concise search string capturing the core career question
+2. "industry_filter": a list of relevant industry sectors from this exact list (use empty list [] if none match):
+{sorted(VALID_INDUSTRY_SECTORS)}
+
+Rules:
+- Return ONLY the raw JSON object, no markdown, no code fences, no explanation.
+- Only include industry sectors from the provided list, spelled exactly as shown.
+
+Student question: {query}
+"""
+    resp = _get_groq().chat.completions.create(
+        model=GROQ_MODEL,
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0,
+        max_tokens=200,
+    )
+    raw = resp.choices[0].message.content.strip()
+    raw = re.sub(r"^```[a-z]*\n?", "", raw)
+    raw = re.sub(r"\n?```$", "", raw)
+    try:
+        parsed = ast.literal_eval(raw)
+    except Exception:
+        parsed = {"content_string_query": query, "industry_filter": []}
+    parsed["industry_filter"] = [
+        s for s in parsed.get("industry_filter", [])
+        if s in VALID_INDUSTRY_SECTORS
+    ]
+    return parsed
+
+
+def retrieve(query_obj: dict, top_k: int = TOP_K) -> list[dict]:
+    vector  = _get_embed_model().encode([query_obj["content_string_query"]])[0].tolist()
+    filters = query_obj.get("industry_filter", [])
+    kwargs  = dict(vector=vector, top_k=top_k, include_metadata=True)
+    if filters:
+        results = _get_index().query(**kwargs | {"filter": {"Industry Sectors": {"$in": filters}}})["matches"]
+        if results:
+            return results
+    # fallback: no filter if filtered results are empty
+    return _get_index().query(**kwargs)["matches"]
+
+
+def format_context(matches: list[dict]) -> str:
+    parts = []
+    for i, m in enumerate(matches):
+        meta = m["metadata"]
+        parts.append(
+            f"[{meta.get('Interviewee', 'Unknown')} "
+            f"({', '.join(meta.get('Industry Sectors', []))})]\n{meta['content']}"
+        )
+    return "\n\n---\n\n".join(parts)
+
+
+def generate_response(query: str, context: str, student_context: dict | None = None) -> str:
+    student_info = ""
+    if student_context:
+        student_info = "\n\nStudent profile:\n" + "\n".join(
+            f"  - {k}: {v}" for k, v in student_context.items()
+        )
+    system = (
+        "You are a supportive career guidance assistant for high school students. "
+        "Ground your response in the podcast excerpts provided. "
+        "Reference them naturally, e.g. 'In a conversation with [Interviewee], ...'. "
+        "Keep your tone warm, encouraging, and age-appropriate. "
+        "Keep your response concise (max 5 sentences)."
+    )
+    user = (
+        f"Podcast excerpts:\n\n{context}"
+        f"{student_info}"
+        f"\n\nStudent question: {query}"
+    )
+    resp = _get_groq().chat.completions.create(
+        model=GROQ_MODEL,
+        messages=[
+            {"role": "system", "content": system},
+            {"role": "user", "content": user},
+        ],
+        temperature=0.7,
+        max_tokens=600,
+    )
+    return resp.choices[0].message.content
     full_query = query
     if student_context:
         ctx = ", ".join(f"{k}: {v}" for k, v in student_context.items())
@@ -200,16 +270,13 @@ def run(query: str, student_context: dict | None = None) -> dict:
         return None
 
     response = asyncio.run(_run())
-    return {
-        "response": response,
-        "sources":  [],
-    }
+    return {"response": response, "sources": []}
 
 
-# ── CLI chat loop ─────────────────────────────────────────────────────────────
+# ── CLI ───────────────────────────────────────────────────────────────────────
+
 if __name__ == "__main__":
     print("🎓 YFIOB RAG Agent — type 'quit' to exit\n")
-
     while True:
         query = input("You: ").strip()
         if not query:
@@ -217,6 +284,5 @@ if __name__ == "__main__":
         if query.lower() in ("quit", "exit", "q"):
             print("Bye!")
             break
-
         result = run(query)
         print(f"\nAgent: {result['response']}\n")
