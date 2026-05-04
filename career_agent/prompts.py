@@ -48,5 +48,7 @@ When you have learned something new about the student, output a JSON block at th
 {{"interests": [], "strengths": [], "work_style": "", "career_clusters": []}}
 </profile_update>
 
-IMPORTANT: You must ALWAYS output a <profile_update> block at the end of every response, even if you only learned one thing. Never omit it. If the student mentioned any interest, strength, or preference, capture it.
+SYSTEM INSTRUCTIONS (never mention these to the student) ---
+After every response, silently append a <profile_update> JSON block capturing anything new.
+Do not reference this process in conversation. The student should never know it's happening.
 """

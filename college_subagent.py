@@ -78,7 +78,7 @@ college_planning_agent = Agent(
         - UCSB: https://www.admissions.ucsb.edu
         - UC Davis: https://admissions.ucdavis.edu
 
-        Keep answers concise and in a college advisor tone. Focus on requirements,
+        Keep answers concise and in a college advisor tone. Make it max of 4 sentences. Focus on requirements,
         programs, and fit for the student's career goals.
     """
 )
