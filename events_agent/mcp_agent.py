@@ -77,33 +77,30 @@ agent = Agent(
 APP_NAME = "events_agent"
 USER_ID = "user_1"
 
-def run(query: str, student_context: dict = {}) -> dict:
-    "run function for mcp agent that the main can call"
+async def run(query: str, student_context: dict = None) -> dict:
+    student_context = student_context or {}
+    
     full_query = query
     if student_context:
         ctx = ", ".join(f"{k}: {v}" for k, v in student_context.items())
         full_query = f"[Student context: {ctx}]\n{query}"
 
-    async def _run():
-        session_id = f"events_{uuid.uuid4()}"
-        session_service = InMemorySessionService()
-        await session_service.create_session(
-            app_name=APP_NAME, user_id=USER_ID, session_id=session_id
-        )
-        runner = Runner(
-            app_name=APP_NAME,
-            agent=agent,
-            session_service=session_service
-        )
-        content = Content(role="user", parts=[Part(text=full_query)])
-        final_response = None
-        async for event in runner.run_async(
-            user_id=USER_ID, session_id=session_id,
-            new_message=content
-        ):
-            if event.is_final_response():
-                return event.content.parts[0].text
+    session_id = f"events_{uuid.uuid4()}"
+    session_service = InMemorySessionService()
+    await session_service.create_session(
+        app_name=APP_NAME, user_id=USER_ID, session_id=session_id
+    )
+    runner = Runner(
+        app_name=APP_NAME,
+        agent=agent,
+        session_service=session_service
+    )
+    content = Content(role="user", parts=[Part(text=full_query)])
+    async for event in runner.run_async(
+        user_id=USER_ID, session_id=session_id,
+        new_message=content
+    ):
+        if event.is_final_response():
+            return {"response": event.content.parts[0].text}
 
-        return "No response from events agent"
-
-    return {"response": asyncio.run(_run())}
+    return {"response": "No response from events agent"}

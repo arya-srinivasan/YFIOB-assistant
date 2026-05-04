@@ -17,6 +17,9 @@ from google.adk.tools import FunctionTool
 from google.genai import types
 
 from college_cache import redis_client, CACHE_TTL
+import sys
+
+sys.stdout.reconfigure(line_buffering=True)
 
 load_dotenv()
 
@@ -32,11 +35,11 @@ def scrape_college_website(url: str) -> str:
     cached = redis_client.get(cache_key)
     
     if cached:
-        print(f"[SCRAPE CACHE HIT] {url}") # just for debugging
+        print(f"[SCRAPE CACHE HIT] {url}", flush=True) # just for debugging
         return cached
 
     try: # this is like the else block but with error handling
-        print(f"[SCRAPING] {url}")
+        print(f"[SCRAPING] {url}", flush=True)
 
         headers = {"User-Agent": "Mozilla/5.0"}
         resp = requests.get(url, headers=headers, timeout=10)
@@ -83,44 +86,37 @@ college_planning_agent = Agent(
 
 # ── run() wrapper for the router ─────────────────────────────────────────────
 
-def run(query: str, student_context: dict = {}) -> dict:
-    """
-    Single-turn function for the router to call.
-    Takes a question and optional student context, returns a response dict.
-    """
-    # Inject student context into the query if available
+async def run(query: str, student_context: dict = None) -> dict:
+    student_context = student_context or {}
+    
     full_query = query
     if student_context:
         ctx = ", ".join(f"{k}: {v}" for k, v in student_context.items())
         full_query = f"[Student context: {ctx}]\n{query}"
 
-    async def _run():
-        session_service = InMemorySessionService()
-        await session_service.create_session(
-            app_name=APP_NAME, user_id=USER_ID, session_id=SESSION_ID
-        )
-        runner = Runner(
-            app_name=APP_NAME,
-            agent=college_planning_agent,
-            session_service=session_service
-        )
-        content = types.Content(role="user", parts=[types.Part(text=full_query)])
-        async for event in runner.run_async(
-            user_id=USER_ID, session_id=SESSION_ID, new_message=content
-        ):
-            if event.is_final_response():
-                if event.content and event.content.parts:
-                    return event.content.parts[0].text
-        return "No response from college agent."
-
-    response_text = asyncio.run(_run())
-    return {"response": response_text}
+    session_id = str(uuid.uuid4())
+    session_service = InMemorySessionService()
+    await session_service.create_session(
+        app_name=APP_NAME, user_id=USER_ID, session_id=session_id
+    )
+    runner = Runner(
+        app_name=APP_NAME,
+        agent=college_planning_agent,
+        session_service=session_service
+    )
+    content = types.Content(role="user", parts=[types.Part(text=full_query)])
+    async for event in runner.run_async(
+        user_id=USER_ID, session_id=session_id, new_message=content
+    ):
+        if event.is_final_response():
+            if event.content and event.content.parts:
+                return {"response": event.content.parts[0].text}
+    return {"response": "No response from college agent."}
 
 
-# ── Quick test ────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    result = run(
+    result = asyncio.run(run(
         query="What California colleges are good for someone interested in computer science?",
         student_context={"grade": "11th", "interests": "coding, math"}
-    )
+    ))
     print(result["response"])

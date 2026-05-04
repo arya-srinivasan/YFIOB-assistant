@@ -14,6 +14,7 @@ from career_agent.memory import load_profile, init_db
 
 from typing import Dict, Any, Optional
 import uvicorn
+from fastapi.responses import FileResponse
 
 # ── Models ────────────────────────────────────────────────────────────────────
 
@@ -33,12 +34,11 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 @app.on_event("startup")
 async def startup():
@@ -72,6 +72,10 @@ def get_profile(user_id: str):
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+@app.get("/")
+def root():
+    return FileResponse("src/index.html")
 
 
 # ── Run ───────────────────────────────────────────────────────────────────────
